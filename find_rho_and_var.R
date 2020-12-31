@@ -39,7 +39,7 @@ run_cor_bootstrap  <- function(x,n_it=20L,nThreads=1L,verbose = TRUE){
 	}
 	rho_matrix  <- cor_sum / n_it
 	# The procedure might be numerically unstable, so we make sure the estimated variances are always positive
-	var_matrix  <- abs((cor_sq_sum - cor_sum*cor_sum) / (n_it - 1))
+	var_matrix  <- abs((cor_sq_sum - cor_sum*cor_sum/n_it) / (n_it - 1))
 	list(rho=rho_matrix,var=var_matrix)
 }
 
