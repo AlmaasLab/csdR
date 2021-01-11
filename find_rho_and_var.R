@@ -3,6 +3,8 @@ suppressPackageStartupMessages(library(WGCNA))
 suppressPackageStartupMessages(library(optparse))
 suppressPackageStartupMessages(library(glue))
 suppressPackageStartupMessages(library(magrittr))
+suppressPackageStartupMessages(library(Rcpp))
+sourceCpp("welford.cpp")
 # make_option(c("-h", "--help"), action="store", default=FALSE, 
 #                      help="Show this help message and exit")
 options_list  <- list(
@@ -26,20 +28,23 @@ fast_spearman  <- function(x,nThreads=1L){
 
 run_cor_bootstrap  <- function(x,n_it=20L,nThreads=1L,verbose = TRUE){
 	n_res  <- ncol(x)
-	cor_sum  <- array(0,c(n_res,n_res))
-	cor_sq_sum  <- array(0,c(n_res,n_res))
+	gene_names <- colnames(x)
+	rho_matrix  <- array(0,c(n_res,n_res),
+	                     dimnames = list(gene_names,gene_names))
+	var_matrix  <- array(0,c(n_res,n_res),
+	                     dimnames = list(gene_names,gene_names))
 	for(i in seq_len(n_it)){
 		if(verbose){
 		log_progress(glue("Running bootstrap iteration {i} of {n_it}..."))
 		}
 		bootstrap_ind  <- sample(seq_len(nrow(x)),replace=TRUE)
 		cor_matrix <- fast_spearman(x,nThreads)
-		cor_sum  <- cor_sum + cor_matrix
-		cor_sq_sum  <- cor_sq_sum + cor_matrix*cor_matrix
+		welford_update(mu = rho_matrix,var = var_matrix,cor_matrix = cor_matrix,
+		               iteration = i,n_threads = nThreads)
+		
 	}
-	rho_matrix  <- cor_sum / n_it
 	# The procedure might be numerically unstable, so we make sure the estimated variances are always positive
-	var_matrix  <- abs((cor_sq_sum - cor_sum*cor_sum/n_it) / (n_it - 1))
+	var_matrix  <- var_matrix / (n_it - 1)
 	list(rho=rho_matrix,var=var_matrix)
 }
 
@@ -72,19 +77,26 @@ run_csd  <- function(x_1,x_2,n_it=20L,nThreads=1L,verbose=TRUE){
 	if(verbose){
 		log_progress("Summarizing results")
 	}
-	std_estimate  <- sqrt(res_1$var + res_2$var)
-	C  <- abs(res_1$rho + res_2$rho) / std_estimate
-	S <- abs(abs(res_1$rho) - abs(res_2$rho)) / std_estimate
-	D <- abs(abs(res_1$rho) + abs(res_2$rho) - abs(res_1$rho + res_2$rho)) / std_estimate
-	csd_df  <- data.frame(Gene1 =  rownames(C)[row(C)[upper.tri(C)]],
-			      Gene2 = colnames(C)[col(C)[upper.tri(C)]],
-			      rho1 = res_1$rho[upper.tri(res_1$rho)],
-			      rho2 = res_2$rho[upper.tri(res_2$rho)],
-			      var1 = res_1$var[upper.tri(res_1$var)],
-			      var2 = res_2$var[upper.tri(res_2$var)],
-			      cVal= C[upper.tri(C)],
-                     	      sVal = S[upper.tri(S)],
-                     	      dVal = D[upper.tri(D)])
+	upper_tri_matrix <- upper.tri(res_1$rho)
+	Gene1 <- rownames(res_1$rho)[row(res_1$rho)[upper_tri_matrix]]
+	Gene2 <- colnames(res_1$rho)[col(res_1$rho)[upper_tri_matrix]]
+	rho1 = res_1$rho[upper_tri_matrix]
+	rho2 = res_2$rho[upper_tri_matrix]
+	var1 = res_1$var[upper_tri_matrix]
+	var2 = res_2$var[upper_tri_matrix]
+	std_estimate  <- sqrt(var1 + var2)
+	cVal  <- abs(rho1 + rho2) / std_estimate
+	sVal <- abs(abs(rho1) - abs(rho2)) / std_estimate
+	dVal <- abs(abs(rho1) + abs(rho2) - abs(rho1 + rho2)) / std_estimate
+	csd_df  <- data.frame(Gene1,
+			      Gene2,
+			      rho1,
+			      rho2,
+			      var1,
+			      var2,
+			      cVal,
+			      sVal,
+			      dVal)
 	class(csd_df)  <- c("csd_res", class(csd_df))
 	csd_df
 }
