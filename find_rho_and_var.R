@@ -80,10 +80,10 @@ run_csd  <- function(x_1,x_2,n_it=20L,nThreads=1L,verbose=TRUE){
 	upper_tri_matrix <- upper.tri(res_1$rho)
 	Gene1 <- rownames(res_1$rho)[row(res_1$rho)[upper_tri_matrix]]
 	Gene2 <- colnames(res_1$rho)[col(res_1$rho)[upper_tri_matrix]]
-	rho1 = res_1$rho[upper_tri_matrix]
-	rho2 = res_2$rho[upper_tri_matrix]
-	var1 = res_1$var[upper_tri_matrix]
-	var2 = res_2$var[upper_tri_matrix]
+	rho1 <- res_1$rho[upper_tri_matrix]
+	rho2 <- res_2$rho[upper_tri_matrix]
+	var1 <- res_1$var[upper_tri_matrix]
+	var2 <- res_2$var[upper_tri_matrix]
 	std_estimate  <- sqrt(var1 + var2)
 	cVal  <- abs(rho1 + rho2) / std_estimate
 	sVal <- abs(abs(rho1) - abs(rho2)) / std_estimate
