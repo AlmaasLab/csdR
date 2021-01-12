@@ -38,7 +38,7 @@ run_cor_bootstrap  <- function(x,n_it=20L,nThreads=1L,verbose = TRUE){
 		log_progress(glue("Running bootstrap iteration {i} of {n_it}..."))
 		}
 		bootstrap_ind  <- sample(seq_len(nrow(x)),replace=TRUE)
-		cor_matrix <- fast_spearman(x,nThreads)
+		cor_matrix <- fast_spearman(x[bootstrap_ind,],nThreads)
 		welford_update(mu = rho_matrix,var = var_matrix,cor_matrix = cor_matrix,
 		               iteration = i,n_threads = nThreads)
 		
