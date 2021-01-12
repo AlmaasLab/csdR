@@ -11,7 +11,7 @@ SEXP welford_update(NumericVector mu, NumericVector var,NumericVector cor_matrix
                     int iteration, int n_threads) {
   R_xlen_t n_elements = mu.length();
 #if defined(_OPENMP)
-  #pragma omp parallel for num_threads(n_threads)
+  #pragma omp parallel for simd num_threads(n_threads)
 #endif
   for(R_xlen_t i = 0; i < n_elements; i++){
       double cor = cor_matrix[i];
