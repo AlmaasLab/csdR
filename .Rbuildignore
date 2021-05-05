@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+.gitignore
+^.*\.Rproj$
+^\.Rproj\.user$
+^debug.R$
+^dependence_script.R$
+^scetch.R$
+^.github/*
+^data-raw$
