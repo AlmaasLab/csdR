@@ -1,3 +1,4 @@
+set.seed(432)
 n_it <- 10000
 N_SAMPLES <- 100
 gene_1 <- rnorm(N_SAMPLES,mean = 0,sd = 1)

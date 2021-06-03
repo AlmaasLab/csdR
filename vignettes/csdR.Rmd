@@ -1,0 +1,129 @@
+---
+title: "Analyzing differential co-expression with csdR"
+bibliography: ../inst/REFERENCES.bib
+output: BiocStyle::html_document
+vignette: >
+  %\VignetteIndexEntry{csdR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+ ```{r style, echo = FALSE, results = 'asis'}
+  BiocStyle::markdown()
+  ```
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+suppressPackageStartupMessages(
+  {
+library(csdR)
+library(magrittr)
+library(igraph)
+library(glue)
+  }
+)
+set.seed(45394534)
+```
+
+# When and why to use this package
+The purpose of this package is to compare the gene expression of the genes in *two* different conditions. The most typical case is when comparing gene expression in patients with a disease with gene expression in study participants without the disease. Hence, we may construct a network containing genes which are relevant for the development of the disease. The input data may come from different measurements of expression such as microarray, proteomics or RNA-seq as long as:
+
+- There are no missing values in the data. Consider filling in with average values or pseudo-values if this is not the case.
+- The expression values are coded as continuous numerical values which are comparable between samples. Note that only the ranks of each gene across the samples does matter as CSD uses the rank-based Spearman correlation.
+- The gene labels for the two conditions must match.
+
+For differential gene-expression involving more than two separate conditions, consider `CoDiNA` [@MorselliGysi2020] instead.
+
+# Some theoretical considerations
+
+This is a re-implementation and slight modification of the CSD algorithm presented by Voigt _et al._ 2017[@Voigt2017]. In the first phase, the algorithm finds the co-expression between all genes within each condition using the Spearman correlation. For each pair of genes, we apply bootstrapping across the samples and compute the mean Spearman correlation $\rho_1$ and $\rho_2$ for the two conditions and the associated standard errors $\sigma_1$ and $\sigma_2$. In the second stage, the values for the two conditions are compared and gives us the following *differential* co-expression scores:
+
+* Conserved score, $C=\frac{\left|\rho_1+\rho_2\right|}{\sqrt{\sigma_1^2+\sigma_2^2}}$, a high value indicating the same strong co-expression in both conditions.
+* Specific score, $S=\frac{\left|\left|\rho_1\right|-\left|\rho_2\right|\right|}{\sqrt{\sigma_1^2+\sigma_2^2}}$, a high value indicating a strong co-expression in one condition, but not in the other.
+* Differentiated score, $D=\frac{\left|\left|\rho_1\right|+\left|\rho_2\right|-\left|\rho_1+\rho_2\right|\right|}{\sqrt{\sigma_1^2+\sigma_2^2}}$, a high value indicating a strong co-expression in both conditions, but with the opposite sign.
+
+
+
+
+# Workflow outline
+
+In this example, we are provided by two expression expression matrices from thyroid glands, `sick_expression` for patients with thyroid cancer and `normal_expression` for healthy controls. To run the CSD analysis, we simply do the following:
+```{r}
+csd_results <- run_csd(x_1 = sick_expression, x_2 = normal_expression,
+                       n_it = 10, nThreads = 2L, verbose = FALSE)
+```
+
+After obtaining these results, we may write them to disk. However, for datasets with thousands of genes, we will get millions upon millions of gene pairs. Writing the results to disk is likely to fill up gigabytes of valuable storage space while the disk IO itself might take a considerable amount of time. Furthermore, we must reduce the information load to create meaningful results, so we better to that while the data is still in memory. We decide to select the 100 edges with highest C, S, and D-score.
+
+```{r}
+pairs_to_pick <- 100L
+c_filter <- partial_argsort(csd_results$cVal, pairs_to_pick)
+c_frame <- csd_results[c_filter,]
+s_filter <- partial_argsort(csd_results$sVal, pairs_to_pick)
+s_frame <- csd_results[s_filter,]
+d_filter <- partial_argsort(csd_results$dVal, pairs_to_pick)
+d_frame <- csd_results[d_filter,]
+```
+
+Why does the `csdR` package provide a general `partial_argsort` function which takes in a numeric vector and spits out the indecies of the largest elements instead of a more specialized function directly extracting the top results from the dataframe? The answer is flexibility. Writing an additional line of code and a dollar sign is not that much work after all and we may want more flexible approaches such as displaying the union of the C, S- and D-edges:
+
+```{r}
+csd_filter <- c_filter %>% union(s_filter) %>% union(d_filter)
+csd_frame <- csd_results[csd_filter,]
+```
+
+## How to we approach from here?
+
+The next logical step is to construct a network and do some analysis. This is outside the scope of this package, but we will provide some pointers for completeness. One viable approach is to use the ordinary `write.table` function to write the results of a file and then use an external tools such as Cytoscape to further make conclusions. Often, you may want to make an ontology enrichment of the genes.
+
+The other option is of course to continue using R. Here, we provide an example of combining the C-, S- and D-networks and coloring the edges blue, green and red, respectively depending of where they come from.
+```{r}
+c_network <- graph_from_data_frame(c_frame,directed = FALSE)
+s_network <- graph_from_data_frame(s_frame,directed = FALSE)
+d_network <- graph_from_data_frame(d_frame,directed = FALSE)
+E(c_network)$edge_type <- 'C'
+E(s_network)$edge_type <- 'S'
+E(d_network)$edge_type <- 'D'
+combined_network <- union(c_network,s_network,d_network)
+# Auxillary function for combining 
+# the attributes of the three networks in a proper way
+join_attributes <- function(graph,attribute){
+  ifelse(
+    test = is.na(edge_attr(graph,glue("{attribute}_1"))),
+          yes = ifelse(
+            test = is.na(edge_attr(graph,glue("{attribute}_2"))),
+          yes = edge_attr(graph,glue("{attribute}_3")),
+          no = edge_attr(graph,glue("{attribute}_2"))
+          ),
+    no = edge_attr(graph,glue("{attribute}_1"))
+)
+}
+E(combined_network)$edge_type <- join_attributes(combined_network,"edge_type")
+layout <- layout_nicely(combined_network)
+E(combined_network)$color <- dplyr::recode(E(combined_network)$edge_type,
+C = "darkblue", S = "green", D = "darkred")
+plot(combined_network,layout = layout, vertex.size = 3,edge.width = 2, vertex.label.cex=0.001)
+```
+
+
+
+# Considerations to note
+
+## Number of bootstrap iterations
+As with any bootstrap procedure the number of iterations represented by the argument `n_it` needs to be *sufficiently large* in order to get reproducible results. What this means is a matter of trial and error. In general this means that you should re-run the computations with a different random seed to see whether the number of bootstrap iterations are sufficient. Experience has shown that ~ 100 iterations might be sufficient to reproduce almost the same results in some cases, whereas in other cases, especially when the values are close, you may choose to run several thousand iterations.
+
+## Memory consumption
+
+For datasets with 20 000 to 30 000 genes, a considerable amount of memory is consumed during the computations. It it therefore not recommended in such cases to run CSD on your laptop or even a workstation, but rather on a compute server with several hundreds GB of RAM.
+
+## Number of top gene pairs to pick
+
+How many gene pairs to select depends on the specific needs and how big a network you want to handle. A 10 000 edge network may not be easy to visualize, but quantitative network metrics can still be extracted. Also, generating more edges than necessary usually does not make any major harm as superfluous edges can quickly be filter out afterwards. However, if you select fewer edges than you actually need, you have to re-do all calculations to increase the number.
+
+# References

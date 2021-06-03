@@ -1,6 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+scratch.R
 .gitignore
 ^.*\.Rproj$
 ^\.Rproj\.user$
@@ -9,3 +10,6 @@
 ^scetch.R$
 ^.github/*
 ^data-raw$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

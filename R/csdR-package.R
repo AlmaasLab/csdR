@@ -1,5 +1,23 @@
-## usethis namespace: start
-#' @importFrom Rcpp sourceCpp
+#' @name csdR
 #' @useDynLib csdR, .registration = TRUE
-## usethis namespace: end
-NULL
+#' @title Perform differential co-expression analysis
+#' @description This package provides functionality to perform differential co-expression
+#' analysis by the CSD algorithm presented by Voigt et al. 2017. The main function of the
+#' package is \code{\link{run_csd}} which compares gene expression for two
+#' conditions and returns values for C, S and D for each gene pair. Also, the underlying
+#' function \code{\link{run_cor_bootstrap}} is provided for doing correlation analysis
+#' \emph{within} a condition, but is mostly for experimental and expect use only.
+#' 
+#' The function \code{\link{partial_argsort}} is aimed specifically at the task of
+#' selecting the highest values of C, S and D of the results with minimal computational
+#' overhead, but is written also to be useable for other problems of the same type.
+#' 
+#' For more details on how to approach, please read the
+#' vignette for the package or the individual manpages for the functions.
+#' 
+#' @references Voigt A, Nowick K and Almaas E "A composite network of conserved and tissue specific
+#' gene interactions reveals possible genetic interactions in glioma"
+#' In: \emph{PLOS Computational Biology} 13(9): e1005739.
+#' (doi: \url{https://doi.org/10.1371/journal.pcbi.1005739})
+#' @keywords internal
+"_PACKAGE"

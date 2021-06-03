@@ -3,7 +3,6 @@
 export(partial_argsort)
 export(run_cor_bootstrap)
 export(run_csd)
-importFrom(Rcpp,sourceCpp)
 importFrom(RhpcBLASctl,blas_set_num_threads)
 importFrom(WGCNA,cor)
 importFrom(glue,glue)

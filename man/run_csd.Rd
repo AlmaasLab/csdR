@@ -50,7 +50,7 @@ but must be in the same namespace. Only genes present in both datasets will be c
 analysis.
 }
 \examples{
-cor_res <- run_csd(x = normal_expression, n_it = 100, nThreads = 2L)
+cor_res <- run_csd(x_1 = sick_expression,x_2 = normal_expression, n_it = 100, nThreads = 2L)
 c_max <- max(cor_res$cVal)
 }
 \references{

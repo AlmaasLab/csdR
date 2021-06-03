@@ -27,9 +27,6 @@ DataFrame summarizeResults(List res_1, List res_2, int n_threads) {
     for(int j = i  + 1; j < n_genes; j++){
       R_xlen_t this_index = ((n_genes - 1) + (n_genes - i)) * i / 2
       + j - (i + 1);
-      // Rcout << "i=" << i << std::endl;
-      // Rcout << "j=" << j << std::endl;
-      // Rcout << "this_index=" << this_index << std::endl;
       Gene1_vec[this_index] = gene_names[i];
       Gene2_vec[this_index] = gene_names[j];
       double rho_1 = rho_1_mat(i,j);

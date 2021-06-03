@@ -87,7 +87,7 @@ run_cor_bootstrap  <- function(x,n_it=20L,nThreads=1L,verbose = TRUE){
 #' In: \emph{PLOS Computational Biology} 13(9): e1005739.
 #' (doi: \url{https://doi.org/10.1371/journal.pcbi.1005739})
 #' @examples 
-#' cor_res <- run_csd(x = normal_expression, n_it = 100, nThreads = 2L)
+#' cor_res <- run_csd(x_1 = sick_expression,x_2 = normal_expression, n_it = 100, nThreads = 2L)
 #' c_max <- max(cor_res$cVal)
 #' @export
 run_csd  <- function(x_1,x_2,n_it=20L,nThreads=1L,verbose=TRUE){
@@ -120,26 +120,6 @@ run_csd  <- function(x_1,x_2,n_it=20L,nThreads=1L,verbose=TRUE){
 		log_progress("Summarizing results")
 	}
 	csd_df <- summarizeResults(res_1 = res_1, res_2 = res_2, n_threads = nThreads)
-	# upper_tri_matrix <- upper.tri(res_1$rho)
-	# Gene1 <- rownames(res_1$rho)[row(res_1$rho)[upper_tri_matrix]]
-	# Gene2 <- colnames(res_1$rho)[col(res_1$rho)[upper_tri_matrix]]
-	# rho1 <- res_1$rho[upper_tri_matrix]
-	# rho2 <- res_2$rho[upper_tri_matrix]
-	# var1 <- res_1$var[upper_tri_matrix]
-	# var2 <- res_2$var[upper_tri_matrix]
-	# std_estimate  <- sqrt(var1 + var2)
-	# cVal  <- abs(rho1 + rho2) / std_estimate
-	# sVal <- abs(abs(rho1) - abs(rho2)) / std_estimate
-	# dVal <- abs(abs(rho1) + abs(rho2) - abs(rho1 + rho2)) / std_estimate
-	# csd_df  <- data.frame(Gene1,
-	# 		      Gene2,
-	# 		      rho1,
-	# 		      rho2,
-	# 		      var1,
-	# 		      var2,
-	# 		      cVal,
-	# 		      sVal,
-	# 		      dVal)
 	class(csd_df)  <- c("csd_res", class(csd_df))
 	csd_df
 }
