@@ -7,4 +7,3 @@
 *.o
 welford.so
 inst/doc
-docs
