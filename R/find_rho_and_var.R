@@ -106,7 +106,12 @@ run_csd  <- function(x_1,x_2,n_it=20L,nThreads=1L,verbose=TRUE){
 	x_1  <- x_1[,genes_to_analyze]
 	x_2  <- x_2[,genes_to_analyze]
 	if(verbose){
-	log_progress(glue("Running CSD with\n{nrow(x_1)} samples from condition 1\n{nrow(x_2)} samples from condition 2\nNumber of genes: {length(genes_to_analyze)}\nNumber of bootstrap iterations: {n_it}\nNumber of threads: {nThreads}"))
+	log_progress(glue("Running CSD with
+	                  {nrow(x_1)} samples from condition 1
+	                  {nrow(x_2)} samples from condition 2
+	                  Number of genes: {length(genes_to_analyze)}
+	                  Number of bootstrap iterations: {n_it}
+	                  Number of threads: {nThreads}"))
 }
 	if(verbose){
 		log_progress("Running correlation bootstrapping on first condition...")
