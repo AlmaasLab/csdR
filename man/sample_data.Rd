@@ -7,13 +7,16 @@
 \alias{sick_expression}
 \title{Sample matrices for CSD}
 \format{
-Numeric matrices of normalized gene expression. Genes are in columns, whereas samples are in rows.
+Numeric matrices of normalized gene expression.
+Genes are in columns, whereas samples are in rows.
 
 An object of class \code{matrix} (inherits from \code{array}) with 504 rows and 1000 columns.
 }
 \source{
-For the expression matrix for healthy individuals  GenotypeTissue Expression (GTEx) V7.
-For the thyroid cancer patients, the data are obtained for the Thyroid Cancer
+For the expression matrix for healthy individuals,
+GenotypeTissue Expression (GTEx) V7.
+For the thyroid cancer patients,
+the data are obtained for the Thyroid Cancer
 project (THCA) from The Cancer Genome Atlas
 }
 \usage{

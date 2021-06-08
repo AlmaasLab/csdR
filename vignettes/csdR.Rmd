@@ -3,31 +3,29 @@ title: "Analyzing differential co-expression with csdR"
 bibliography: ../inst/REFERENCES.bib
 output: BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{csdR}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+    %\VignetteIndexEntry{csdR}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
 ---
 
- ```{r style, echo = FALSE, results = 'asis'}
-  BiocStyle::markdown()
-  ```
+```{r style, echo = FALSE, results = 'asis'}
+BiocStyle::markdown()
+```
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+    collapse = TRUE,
+    comment = "#>"
 )
 ```
 
 ```{r setup}
-suppressPackageStartupMessages(
-  {
-library(csdR)
-library(magrittr)
-library(igraph)
-library(glue)
-  }
-)
+suppressPackageStartupMessages({
+    library(csdR)
+    library(magrittr)
+    library(igraph)
+    library(glue)
+})
 set.seed(45394534)
 ```
 
@@ -55,8 +53,10 @@ This is a re-implementation and slight modification of the CSD algorithm present
 
 In this example, we are provided by two expression expression matrices from thyroid glands, `sick_expression` for patients with thyroid cancer and `normal_expression` for healthy controls. To run the CSD analysis, we simply do the following:
 ```{r}
-csd_results <- run_csd(x_1 = sick_expression, x_2 = normal_expression,
-                       n_it = 10, nThreads = 2L, verbose = FALSE)
+csd_results <- run_csd(
+    x_1 = sick_expression, x_2 = normal_expression,
+    n_it = 10, nThreads = 2L, verbose = FALSE
+)
 ```
 
 After obtaining these results, we may write them to disk. However, for datasets with thousands of genes, we will get millions upon millions of gene pairs. Writing the results to disk is likely to fill up gigabytes of valuable storage space while the disk IO itself might take a considerable amount of time. Furthermore, we must reduce the information load to create meaningful results, so we better to that while the data is still in memory. We decide to select the 100 edges with highest C, S, and D-score.
@@ -64,18 +64,20 @@ After obtaining these results, we may write them to disk. However, for datasets 
 ```{r}
 pairs_to_pick <- 100L
 c_filter <- partial_argsort(csd_results$cVal, pairs_to_pick)
-c_frame <- csd_results[c_filter,]
+c_frame <- csd_results[c_filter, ]
 s_filter <- partial_argsort(csd_results$sVal, pairs_to_pick)
-s_frame <- csd_results[s_filter,]
+s_frame <- csd_results[s_filter, ]
 d_filter <- partial_argsort(csd_results$dVal, pairs_to_pick)
-d_frame <- csd_results[d_filter,]
+d_frame <- csd_results[d_filter, ]
 ```
 
 Why does the `csdR` package provide a general `partial_argsort` function which takes in a numeric vector and spits out the indecies of the largest elements instead of a more specialized function directly extracting the top results from the dataframe? The answer is flexibility. Writing an additional line of code and a dollar sign is not that much work after all and we may want more flexible approaches such as displaying the union of the C, S- and D-edges:
 
 ```{r}
-csd_filter <- c_filter %>% union(s_filter) %>% union(d_filter)
-csd_frame <- csd_results[csd_filter,]
+csd_filter <- c_filter %>%
+    union(s_filter) %>%
+    union(d_filter)
+csd_frame <- csd_results[csd_filter, ]
 ```
 
 ## How to we approach from here?
@@ -84,31 +86,32 @@ The next logical step is to construct a network and do some analysis. This is ou
 
 The other option is of course to continue using R. Here, we provide an example of combining the C-, S- and D-networks and coloring the edges blue, green and red, respectively depending of where they come from.
 ```{r}
-c_network <- graph_from_data_frame(c_frame,directed = FALSE)
-s_network <- graph_from_data_frame(s_frame,directed = FALSE)
-d_network <- graph_from_data_frame(d_frame,directed = FALSE)
-E(c_network)$edge_type <- 'C'
-E(s_network)$edge_type <- 'S'
-E(d_network)$edge_type <- 'D'
-combined_network <- union(c_network,s_network,d_network)
-# Auxillary function for combining 
+c_network <- graph_from_data_frame(c_frame, directed = FALSE)
+s_network <- graph_from_data_frame(s_frame, directed = FALSE)
+d_network <- graph_from_data_frame(d_frame, directed = FALSE)
+E(c_network)$edge_type <- "C"
+E(s_network)$edge_type <- "S"
+E(d_network)$edge_type <- "D"
+combined_network <- union(c_network, s_network, d_network)
+# Auxillary function for combining
 # the attributes of the three networks in a proper way
-join_attributes <- function(graph,attribute){
-  ifelse(
-    test = is.na(edge_attr(graph,glue("{attribute}_1"))),
-          yes = ifelse(
-            test = is.na(edge_attr(graph,glue("{attribute}_2"))),
-          yes = edge_attr(graph,glue("{attribute}_3")),
-          no = edge_attr(graph,glue("{attribute}_2"))
-          ),
-    no = edge_attr(graph,glue("{attribute}_1"))
-)
+join_attributes <- function(graph, attribute) {
+    ifelse(
+        test = is.na(edge_attr(graph, glue("{attribute}_1"))),
+        yes = ifelse(
+            test = is.na(edge_attr(graph, glue("{attribute}_2"))),
+            yes = edge_attr(graph, glue("{attribute}_3")),
+            no = edge_attr(graph, glue("{attribute}_2"))
+        ),
+        no = edge_attr(graph, glue("{attribute}_1"))
+    )
 }
-E(combined_network)$edge_type <- join_attributes(combined_network,"edge_type")
+E(combined_network)$edge_type <- join_attributes(combined_network, "edge_type")
 layout <- layout_nicely(combined_network)
 E(combined_network)$color <- dplyr::recode(E(combined_network)$edge_type,
-C = "darkblue", S = "green", D = "darkred")
-plot(combined_network,layout = layout, vertex.size = 3,edge.width = 2, vertex.label.cex=0.001)
+    C = "darkblue", S = "green", D = "darkred"
+)
+plot(combined_network, layout = layout, vertex.size = 3, edge.width = 2, vertex.label.cex = 0.001)
 ```
 
 

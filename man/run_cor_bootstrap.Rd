@@ -18,16 +18,22 @@ Genes are in columns, samples are in rows.}
 }
 \value{
 A list with two fields \describe{
-\item{rho}{Numeric matrix constaining the bootstrapped mean of the Spearman correlation between each column}
-\item{var}{Numeric matrix constaining the bootstrapped variance of the Spearman correlation between each column}
+\item{rho}{Numeric matrix constaining the bootstrapped
+mean of the Spearman correlation between each column}
+\item{var}{Numeric matrix constaining the bootstrapped
+variance of the Spearman correlation between each column}
 }
 }
 \description{
 This function provides the more low-level functionality
 of bootstrapping the Spearman correlations of the columns within a dataset.
-Only use this function if you want a low-level interface, else \code{\link{run_csd}}
+Only use this function if you want
+a low-level interface, else \code{\link{run_csd}}
 provides a more streamlined approach if you want to do a CSD analysis.
 }
 \examples{
-cor_res <- run_cor_bootstrap(x = normal_expression, n_it = 100, nThreads = 2L)
+cor_res <- run_cor_bootstrap(
+    x = normal_expression,
+    n_it = 100, nThreads = 2L
+)
 }
