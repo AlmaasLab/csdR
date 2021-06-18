@@ -1,6 +1,6 @@
 Package: csdR
 Title: Differential gene co-expression
-Version: 0.99.2
+Version: 0.99.3
 Date: 03-06-2021
 Authors@R: 
     person(given = "Jakob Peder",
