@@ -32,6 +32,7 @@ a low-level interface, else \code{\link{run_csd}}
 provides a more streamlined approach if you want to do a CSD analysis.
 }
 \examples{
+data("normal_expression")
 cor_res <- run_cor_bootstrap(
     x = normal_expression,
     n_it = 100, nThreads = 2L

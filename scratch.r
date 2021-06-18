@@ -19,3 +19,5 @@ message("foo") %>%
     }
 expr <- rlang %>%
     library()
+library(csdR)
+data("sick_expression")

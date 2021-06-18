@@ -65,6 +65,8 @@ but must be in the same namespace.
 Only genes present in both datasets will be considered for the analysis.
 }
 \examples{
+data("sick_expression")
+data("normal_expression")
 cor_res <- run_csd(
     x_1 = sick_expression, x_2 = normal_expression,
     n_it = 100, nThreads = 2L

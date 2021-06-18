@@ -29,6 +29,7 @@ fast_spearman <- function(x, nThreads = 1L) {
 #'  variance of the Spearman correlation between each column}
 #' }
 #' @examples
+#' data("normal_expression")
 #' cor_res <- run_cor_bootstrap(
 #'     x = normal_expression,
 #'     n_it = 100, nThreads = 2L
@@ -113,6 +114,8 @@ run_cor_bootstrap <- function(x, n_it = 20L, nThreads = 1L, verbose = TRUE) {
 #' In: \emph{PLOS Computational Biology} 13(9): e1005739.
 #' (doi: \url{https://doi.org/10.1371/journal.pcbi.1005739})
 #' @examples
+#' data("sick_expression")
+#' data("normal_expression")
 #' cor_res <- run_csd(
 #'     x_1 = sick_expression, x_2 = normal_expression,
 #'     n_it = 100, nThreads = 2L
@@ -127,12 +130,12 @@ run_csd <- function(x_1, x_2, n_it = 20L, nThreads = 1L, verbose = TRUE) {
     shared_x_1 <- intersect(colnames(x_1), genes_to_analyze)
     if (length(shared_x_1) != ncol(x_1)) {
         warning(glue("{ncol(x_1)-length(shared_x_1)} genes
-                     for the first condition were not found in the second"))
+                    for the first condition were not found in the second"))
     }
     shared_x_2 <- intersect(colnames(x_2), genes_to_analyze)
     if (length(shared_x_2) != ncol(x_2)) {
         warning(glue("{ncol(x_2)-length(shared_x_2)} genes
-                     for the second condition were not found in the first"))
+                    for the second condition were not found in the first"))
     }
     x_1 <- x_1[, genes_to_analyze]
     x_2 <- x_2[, genes_to_analyze]

@@ -52,6 +52,8 @@ test_that("overall CSD algorithm works with a small dataset", {
 
 # col_subset <- 1:10
 test_that("overall CSD algorithm gives a reasonable result for more realistic data", {
-    csd_res <- run_csd(x_1 = csdR::normal_expression, x_2 = csdR::sick_expression, n_it = 20, nThreads = 2, verbose = FALSE)
+    data("normal_expression")
+    data("sick_expression")
+    csd_res <- run_csd(x_1 = normal_expression, x_2 = sick_expression, n_it = 20, nThreads = 2, verbose = FALSE)
     expect_equal(object = nrow(csd_res), as.integer(1000 * 999 / 2))
 })

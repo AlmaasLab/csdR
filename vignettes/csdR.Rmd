@@ -51,8 +51,10 @@ This is a re-implementation and slight modification of the CSD algorithm present
 
 # Workflow outline
 
-In this example, we are provided by two expression expression matrices from thyroid glands, `sick_expression` for patients with thyroid cancer and `normal_expression` for healthy controls. To run the CSD analysis, we simply do the following:
+In this example, we are provided by two expression expression matrices from thyroid glands, `sick_expression` for patients with thyroid cancer and `normal_expression` for healthy controls. To run the CSD analysis for these two conditions, we simply do the following:
 ```{r}
+data("sick_expression")
+data("normal_expression")
 csd_results <- run_csd(
     x_1 = sick_expression, x_2 = normal_expression,
     n_it = 10, nThreads = 2L, verbose = FALSE
@@ -128,5 +130,12 @@ For datasets with 20 000 to 30 000 genes, a considerable amount of memory is con
 ## Number of top gene pairs to pick
 
 How many gene pairs to select depends on the specific needs and how big a network you want to handle. A 10 000 edge network may not be easy to visualize, but quantitative network metrics can still be extracted. Also, generating more edges than necessary usually does not make any major harm as superfluous edges can quickly be filter out afterwards. However, if you select fewer edges than you actually need, you have to re-do all calculations to increase the number.
+
+# Session info for this vignette
+```{r}
+sessionInfo()
+```
+
+
 
 # References

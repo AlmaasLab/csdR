@@ -1,6 +1,6 @@
 Package: csdR
 Title: Differential gene co-expression
-Version: 0.99.1
+Version: 0.99.2
 Date: 03-06-2021
 Authors@R: 
     person(given = "Jakob Peder",
@@ -11,7 +11,7 @@ Authors@R:
 Description: This package contains functionality to run differential gene co-expression across two different conditions.
     The algorithm is inspired by Voigt et al. 2017 and finds Conserved, Specific and Differentiated genes (hence the name CSD). 
     This package include efficient and variance calculation by bootstrapping and Welford's algorithm.
-Depends: R (>= 4.0.0)
+Depends: R (>= 4.1.0)
 Imports: 
     WGCNA,
     glue,
@@ -20,7 +20,6 @@ Imports:
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 NeedsCompilation: yes
-LazyData: true
 BugReports: https://github.com/AlmaasLab/csdR/issues
 URL: https://github.com/AlmaasLab/csdR
 Roxygen: list(markdown = TRUE)
