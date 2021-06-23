@@ -21,7 +21,7 @@ License: GPL-3
 Encoding: UTF-8
 NeedsCompilation: yes
 BugReports: https://github.com/AlmaasLab/csdR/issues
-URL: https://github.com/AlmaasLab/csdR
+URL: https://almaaslab.github.io/csdR, https://github.com/AlmaasLab/csdR
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 LinkingTo: Rcpp
