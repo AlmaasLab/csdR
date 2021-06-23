@@ -19,16 +19,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-suppressPackageStartupMessages({
-    library(csdR)
-    library(magrittr)
-    library(igraph)
-    library(glue)
-})
-set.seed(45394534)
-```
-
 # When and why to use this package
 The purpose of this package is to compare the gene expression of the genes
 in *two* different conditions.
@@ -53,9 +43,9 @@ consider `CoDiNA` [@MorselliGysi2020] instead.
 
 # Installation
 
-To install this package from Bioconductor, type:
+This package is hosted on Bioconductor. To install it, type:
 
-```{r, eval=FALSE}
+```{r install, eval=FALSE}
 if (!requireNamespace("BiocManager", quietly=TRUE))
     install.packages("BiocManager")
 BiocManager::install("csdR")
@@ -67,7 +57,18 @@ Then,
 library(csdR)
 ```
 
-should load the package into the current **R** session.
+should load the package into the current **R** session. For this vignette, we further load some auxiliary packages and set the random seed
+
+```{r setup}
+suppressPackageStartupMessages({
+    library(magrittr)
+    library(igraph)
+    library(glue)
+})
+set.seed(45394534)
+```
+
+
 
 # Some theoretical considerations
 

@@ -17,7 +17,7 @@ Imports:
     glue,
     RhpcBLASctl,
     Rcpp
-License: GPL-3 + file LICENSE
+License: GPL-3
 Encoding: UTF-8
 NeedsCompilation: yes
 BugReports: https://github.com/AlmaasLab/csdR/issues
