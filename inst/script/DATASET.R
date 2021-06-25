@@ -1,4 +1,4 @@
-## code to prepare `DATASET` dataset goes here
+## code to prepare dataset goes here
 library(readr)
 library(magrittr)
 set.seed(35397290)

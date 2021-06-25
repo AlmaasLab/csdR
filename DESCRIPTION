@@ -1,12 +1,13 @@
 Package: csdR
 Title: Differential gene co-expression
-Version: 0.99.3
+Version: 0.99.4
 Date: 03-06-2021
 Authors@R: 
     person(given = "Jakob Peder",
    family = "Pettersen",
    role = c("aut","cre"),
-   email = "jakobpeder.pettersen@gmail.com"
+   email = "jakobpeder.pettersen@gmail.com",
+   comment = c(ORCID = "0000-0002-3485-1634")
    )
 Description: This package contains functionality to run differential gene co-expression across two different conditions.
     The algorithm is inspired by Voigt et al. 2017 and finds Conserved, Specific and Differentiated genes (hence the name CSD). 

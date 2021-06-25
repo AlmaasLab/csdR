@@ -37,13 +37,14 @@ In: \emph{PLOS Computational Biology} 13(9): e1005739.
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://almaaslab.github.io/csdR}
   \item \url{https://github.com/AlmaasLab/csdR}
   \item Report bugs at \url{https://github.com/AlmaasLab/csdR/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Jakob Peder Pettersen \email{jakobpeder.pettersen@gmail.com}
+\strong{Maintainer}: Jakob Peder Pettersen \email{jakobpeder.pettersen@gmail.com} (\href{https://orcid.org/0000-0002-3485-1634}{ORCID})
 
 }
 \keyword{internal}
