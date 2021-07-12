@@ -1,6 +1,3 @@
-# sourceCpp('welford.cpp')
-
-
 log_progress <- function(msg) {
     message(glue("{date()} => {msg}"))
 }
