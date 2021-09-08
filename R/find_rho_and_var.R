@@ -3,7 +3,7 @@ log_progress <- function(msg) {
 }
 
 fast_spearman <- function(x, nThreads = 1L) {
-    ranks <- apply(X = x, MARGIN = 2L, FUN = base::rank)
+    ranks <- colRanks(x,ties.method = "average",preserveShape = TRUE)
     cor(ranks, nThreads = nThreads)
 }
 
@@ -16,6 +16,7 @@ fast_spearman <- function(x, nThreads = 1L) {
 #' @importFrom RhpcBLASctl blas_set_num_threads
 #' @importFrom glue glue
 #' @importFrom WGCNA cor
+#' @importFrom matrixStats colRanks
 #' @param x Numeric matrix, the gene expression matrix to analyse.
 #' Genes are in columns, samples are in rows.
 #' @inheritParams run_csd
@@ -32,7 +33,8 @@ fast_spearman <- function(x, nThreads = 1L) {
 #'     n_it = 100, nThreads = 2L
 #' )
 #' @export
-run_cor_bootstrap <- function(x, n_it = 20L, nThreads = 1L, verbose = TRUE) {
+run_cor_bootstrap <- function(x, n_it = 20L, nThreads = 1L,
+                            verbose = TRUE, iterations_gap = 1L) {
     blas_set_num_threads(nThreads)
     n_res <- ncol(x)
     gene_names <- colnames(x)
@@ -43,7 +45,7 @@ run_cor_bootstrap <- function(x, n_it = 20L, nThreads = 1L, verbose = TRUE) {
         dimnames = list(gene_names, gene_names)
     )
     for (i in seq_len(n_it)) {
-        if (verbose) {
+        if (verbose && i %% iterations_gap == 0) {
             log_progress(glue("Running bootstrap iteration {i} of {n_it}..."))
         }
         bootstrap_ind <- sample(seq_len(nrow(x)), replace = TRUE)
@@ -56,6 +58,24 @@ run_cor_bootstrap <- function(x, n_it = 20L, nThreads = 1L, verbose = TRUE) {
     }
     var_matrix <- var_matrix / (n_it - 1)
     list(rho = rho_matrix, var = var_matrix)
+}
+
+validate_csd_input <- function(x_1, x_2) {
+    if (is.null(colnames(x_1)) || is.null(colnames(x_2))) {
+        stop("The input matrices must be labelled with gene names")
+    }
+    genes_to_analyze <- intersect(colnames(x_1), colnames(x_2))
+    shared_x_1 <- intersect(colnames(x_1), genes_to_analyze)
+    if (length(shared_x_1) != ncol(x_1)) {
+        warning(glue("{ncol(x_1)-length(shared_x_1)} genes
+                    for the first condition were not found in the second"))
+    }
+    shared_x_2 <- intersect(colnames(x_2), genes_to_analyze)
+    if (length(shared_x_2) != ncol(x_2)) {
+        warning(glue("{ncol(x_2)-length(shared_x_2)} genes
+                    for the second condition were not found in the first"))
+    }
+    list(x_1 = x_1[, genes_to_analyze], x_2 = x_2[, genes_to_analyze])
 }
 
 #' @title Run CSD analysis
@@ -76,6 +96,9 @@ run_cor_bootstrap <- function(x, n_it = 20L, nThreads = 1L, verbose = TRUE) {
 #' @param n_it Integer, number of bootstrap iterations
 #' @param nThreads Integer, number of threads to use for computations
 #' @param verbose Logical, should progress be printed?
+#' @param iterations_gap If output is verbose - number of iterations
+#' after issue a status message
+#' (Default=1 - displayed only if verbose=TRUE)
 #' @return A \code{data.frame} with
 #' the additional class attribute \code{csd_res} with the
 #'  results of the CSD analysis.
@@ -119,23 +142,11 @@ run_cor_bootstrap <- function(x, n_it = 20L, nThreads = 1L, verbose = TRUE) {
 #' )
 #' c_max <- max(cor_res$cVal)
 #' @export
-run_csd <- function(x_1, x_2, n_it = 20L, nThreads = 1L, verbose = TRUE) {
-    if (is.null(colnames(x_1)) || is.null(colnames(x_2))) {
-        stop("The input matrices must be labelled with gene names")
-    }
-    genes_to_analyze <- intersect(colnames(x_1), colnames(x_2))
-    shared_x_1 <- intersect(colnames(x_1), genes_to_analyze)
-    if (length(shared_x_1) != ncol(x_1)) {
-        warning(glue("{ncol(x_1)-length(shared_x_1)} genes
-                    for the first condition were not found in the second"))
-    }
-    shared_x_2 <- intersect(colnames(x_2), genes_to_analyze)
-    if (length(shared_x_2) != ncol(x_2)) {
-        warning(glue("{ncol(x_2)-length(shared_x_2)} genes
-                    for the second condition were not found in the first"))
-    }
-    x_1 <- x_1[, genes_to_analyze]
-    x_2 <- x_2[, genes_to_analyze]
+run_csd <- function(x_1, x_2, n_it = 20L, nThreads = 1L,
+                    verbose = TRUE, iterations_gap = 1L) {
+    validated_matrices <- validate_csd_input(x_1, x_2)
+    x_1 <- validated_matrices$x_1
+    x_2 <- validated_matrices$x_2
     if (verbose) {
         log_progress(glue("Running CSD with
 \t                  {nrow(x_1)} samples from condition 1
@@ -149,14 +160,16 @@ run_csd <- function(x_1, x_2, n_it = 20L, nThreads = 1L, verbose = TRUE) {
     }
     res_1 <- run_cor_bootstrap(x_1,
         n_it = n_it,
-        nThreads = nThreads, verbose = verbose
+        nThreads = nThreads, verbose = verbose,
+        iterations_gap = iterations_gap
     )
     if (verbose) {
         log_progress("Running correlation bootstrapping on second condition...")
     }
     res_2 <- run_cor_bootstrap(x_2,
         n_it = n_it,
-        nThreads = nThreads, verbose = verbose
+        nThreads = nThreads, verbose = verbose,
+        iterations_gap = iterations_gap
     )
     if (verbose) {
         log_progress("Summarizing results")

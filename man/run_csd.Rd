@@ -4,7 +4,14 @@
 \alias{run_csd}
 \title{Run CSD analysis}
 \usage{
-run_csd(x_1, x_2, n_it = 20L, nThreads = 1L, verbose = TRUE)
+run_csd(
+  x_1,
+  x_2,
+  n_it = 20L,
+  nThreads = 1L,
+  verbose = TRUE,
+  iterations_gap = 1L
+)
 }
 \arguments{
 \item{x_1}{Numeric matrix, the gene expression matrix for
@@ -20,6 +27,10 @@ the second condition.}
 \item{nThreads}{Integer, number of threads to use for computations}
 
 \item{verbose}{Logical, should progress be printed?}
+
+\item{iterations_gap}{If output is verbose - number of iterations
+after issue a status message
+(Default=1 - displayed only if verbose=TRUE)}
 }
 \value{
 A \code{data.frame} with

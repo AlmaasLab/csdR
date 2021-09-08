@@ -4,7 +4,13 @@
 \alias{run_cor_bootstrap}
 \title{Run bootstrapping of Spearman correlations within a dataset}
 \usage{
-run_cor_bootstrap(x, n_it = 20L, nThreads = 1L, verbose = TRUE)
+run_cor_bootstrap(
+  x,
+  n_it = 20L,
+  nThreads = 1L,
+  verbose = TRUE,
+  iterations_gap = 1L
+)
 }
 \arguments{
 \item{x}{Numeric matrix, the gene expression matrix to analyse.
@@ -15,6 +21,10 @@ Genes are in columns, samples are in rows.}
 \item{nThreads}{Integer, number of threads to use for computations}
 
 \item{verbose}{Logical, should progress be printed?}
+
+\item{iterations_gap}{If output is verbose - number of iterations
+after issue a status message
+(Default=1 - displayed only if verbose=TRUE)}
 }
 \value{
 A list with two fields \describe{

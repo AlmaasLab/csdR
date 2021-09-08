@@ -57,7 +57,9 @@ Then,
 library(csdR)
 ```
 
-should load the package into the current **R** session. For this vignette, we further load some auxiliary packages and set the random seed
+should load the package into the current **R** session.
+For this vignette, we further load some auxiliary packages
+and set the random seed
 
 ```{r setup}
 suppressPackageStartupMessages({
