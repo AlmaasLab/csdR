@@ -181,5 +181,8 @@ run_csd <- function(x_1, x_2, n_it = 20L, nThreads = 1L,
         n_threads = nThreads
     )
     class(csd_df) <- c("csd_res", class(csd_df))
+    if (verbose) {
+        log_progress("Returning from CSD procedure...")
+    }
     csd_df
 }
