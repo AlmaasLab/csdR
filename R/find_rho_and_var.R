@@ -75,7 +75,8 @@ validate_csd_input <- function(x_1, x_2) {
         warning(glue("{ncol(x_2)-length(shared_x_2)} genes
                     for the second condition were not found in the first"))
     }
-    list(x_1 = x_1[, genes_to_analyze], x_2 = x_2[, genes_to_analyze])
+    list(x_1 = x_1[, genes_to_analyze], x_2 = x_2[, genes_to_analyze],
+        genes_to_analyze = genes_to_analyze)
 }
 
 #' @title Run CSD analysis
@@ -147,6 +148,7 @@ run_csd <- function(x_1, x_2, n_it = 20L, nThreads = 1L,
     validated_matrices <- validate_csd_input(x_1, x_2)
     x_1 <- validated_matrices$x_1
     x_2 <- validated_matrices$x_2
+    genes_to_analyze <- validated_matrices$genes_to_analyze
     if (verbose) {
         log_progress(glue("Running CSD with
 \t                  {nrow(x_1)} samples from condition 1
