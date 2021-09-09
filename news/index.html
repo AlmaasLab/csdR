@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">csdR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.8</span>
       </span>
     </div>
 
@@ -117,9 +117,17 @@
       <small>Source: <a href='https://github.com/AlmaasLab/csdR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="csdr-010" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.0">
-<a href="#csdr-010" class="anchor"></a>csdR 0.1.0</h1>
+    <div id="csdr-0996" class="section level1">
+<h1 class="page-header" data-toc-text="0.99.6">
+<a href="#csdr-0996" class="anchor"></a>csdR 0.99.6</h1>
+<ul>
+<li>Bugfix: Open MP was not working correctly because of missing compiler flags. For this reason, the <code>Makevars</code> file has been created.</li>
+<li>Calculation of column ranks now uses <code><a href="https://rdrr.io/pkg/matrixStats/man/rowRanks.html">matrixStats::colRanks</a></code> instead of an apply statement with <code><a href="https://rdrr.io/r/base/rank.html">base::rank</a></code>.</li>
+</ul>
+</div>
+    <div id="csdr-0990" class="section level1">
+<h1 class="page-header" data-toc-text="0.99.0">
+<a href="#csdr-0990" class="anchor"></a>csdR 0.99.0</h1>
 <ul>
 <li>Added a <code>NEWS.md</code> file to track changes to the package. This is the first public version of the package.</li>
 </ul>
