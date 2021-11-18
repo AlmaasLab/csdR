@@ -66,6 +66,7 @@ suppressPackageStartupMessages({
     library(magrittr)
     library(igraph)
     library(glue)
+    library(dplyr)
 })
 set.seed(45394534)
 ```
@@ -175,7 +176,7 @@ d_network <- graph_from_data_frame(d_frame, directed = FALSE)
 E(c_network)$edge_type <- "C"
 E(s_network)$edge_type <- "S"
 E(d_network)$edge_type <- "D"
-combined_network <- union(c_network, s_network, d_network)
+combined_network <- igraph::union(c_network, s_network, d_network)
 # Auxillary function for combining
 # the attributes of the three networks in a proper way
 join_attributes <- function(graph, attribute) {
@@ -191,7 +192,7 @@ join_attributes <- function(graph, attribute) {
 }
 E(combined_network)$edge_type <- join_attributes(combined_network, "edge_type")
 layout <- layout_nicely(combined_network)
-E(combined_network)$color <- dplyr::recode(E(combined_network)$edge_type,
+E(combined_network)$color <- recode(E(combined_network)$edge_type,
     C = "darkblue", S = "green", D = "darkred"
 )
 plot(combined_network, layout = layout,

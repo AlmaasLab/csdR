@@ -1,3 +1,7 @@
+# csdR 1.1.1
+
+Made some minor modifications to the `README` and the vignette.
+
 # csdR 0.99.6
 
 * Bugfix: Open MP was not working correctly because of missing compiler flags. For this reason, the `Makevars` file has been created.
