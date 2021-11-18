@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   csdR: csdR.html
-last_built: 2021-11-18T11:47Z
+last_built: 2021-11-18T11:58Z
 urls:
   reference: https://almaaslab.github.io/csdR/reference
   article: https://almaaslab.github.io/csdR/articles
