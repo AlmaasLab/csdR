@@ -1,3 +1,8 @@
+# csdR 1.1.2
+
+Made it expliciat in the documentation that missing values are not allows and
+wrote a test for this case.
+
 # csdR 1.1.1
 
 Made some minor modifications to the `README` and the vignette.

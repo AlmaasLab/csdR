@@ -61,6 +61,12 @@ run_cor_bootstrap <- function(x, n_it = 20L, nThreads = 1L,
 }
 
 validate_csd_input <- function(x_1, x_2) {
+    if (anyNA(x_1)) {
+        stop("Argument x_1 has missing values")
+    }
+    if (anyNA(x_2)) {
+        stop("Argument x_2 has missing values")
+    }
     if (is.null(colnames(x_1)) || is.null(colnames(x_2))) {
         stop("The input matrices must be labelled with gene names")
     }
@@ -89,9 +95,10 @@ validate_csd_input <- function(x_1, x_2) {
 #' compared and C-, S- and D-values are computed
 #' and returned.
 #' @param x_1 Numeric matrix, the gene expression matrix for
-#'  the first condition.
+#' the first condition.
 #' Genes are in columns, samples are in rows.
 #' The columns must be named with the name of the genes.
+#' Missing values are not allowed.
 #' @param x_2 Numeric matrix, the gene expression matrix for
 #' the second condition.
 #' @param n_it Integer, number of bootstrap iterations

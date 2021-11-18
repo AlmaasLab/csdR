@@ -17,7 +17,8 @@ run_csd(
 \item{x_1}{Numeric matrix, the gene expression matrix for
 the first condition.
 Genes are in columns, samples are in rows.
-The columns must be named with the name of the genes.}
+The columns must be named with the name of the genes.
+Missing values are not allowed.}
 
 \item{x_2}{Numeric matrix, the gene expression matrix for
 the second condition.}

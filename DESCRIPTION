@@ -1,6 +1,6 @@
 Package: csdR
 Title: Differential gene co-expression
-Version: 1.1.1
+Version: 1.1.2
 Date: 09-09-2021
 Authors@R: 
     person(given = "Jakob Peder",
@@ -25,7 +25,7 @@ NeedsCompilation: yes
 BugReports: https://github.com/AlmaasLab/csdR/issues
 URL: https://almaaslab.github.io/csdR, https://github.com/AlmaasLab/csdR
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 LinkingTo: Rcpp
 biocViews: DifferentialExpression,
      GraphAndNetwork, GeneExpression, Network

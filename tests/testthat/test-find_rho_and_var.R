@@ -43,7 +43,7 @@ expected_csd_res <- structure(list(
     "data.frame"
 ), row.names = 1L)
 
-test_that("overall CSD algorithm works with a small dataset", {
+test_that("Overall CSD algorithm works with a small dataset", {
     expect_equal(
         object = run_csd(x_1 = combined_matrix, x_2 = combined_matrix_sick, n_it = n_it, nThreads = 2, verbose = FALSE),
         expected = expected_csd_res, tolerance = 0.05
@@ -51,9 +51,19 @@ test_that("overall CSD algorithm works with a small dataset", {
 })
 
 # col_subset <- 1:10
-test_that("overall CSD algorithm gives a reasonable result for more realistic data", {
+test_that("Overall CSD algorithm gives a reasonable result for more realistic data", {
     data("normal_expression")
     data("sick_expression")
     csd_res <- run_csd(x_1 = normal_expression, x_2 = sick_expression, n_it = 20, nThreads = 2, verbose = FALSE)
     expect_equal(object = nrow(csd_res), as.integer(1000 * 999 / 2))
+})
+
+test_that("Missing values results in errors", {
+    data("normal_expression")
+    data("sick_expression")
+    x_1 <- normal_expression
+    x_2 <- sick_expression
+    normal_expression[20L,30L] <- NA
+    expect_error(run_csd(x_1 = normal_expression, x_2 = sick_expression,
+                         n_it = 20, nThreads = 2, verbose = FALSE), regexp =  "missing values")
 })
