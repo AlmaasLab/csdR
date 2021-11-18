@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">csdR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -70,7 +70,7 @@
 
       
 
-      </header><script src="csdR_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="csdR_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Analyzing differential co-expression with csdR</h1>
@@ -159,8 +159,8 @@ document.addEventListener("DOMContentLoaded", function() {
 <span class="va">d_frame</span> <span class="op">&lt;-</span> <span class="va">csd_results</span><span class="op">[</span><span class="va">d_filter</span>, <span class="op">]</span></code></pre></div>
 <p>Why does the <code>csdR</code> package provide a general <code>partial_argsort</code> function which takes in a numeric vector and spits out the indecies of the largest elements instead of a more specialized function directly extracting the top results from the dataframe? The answer is flexibility. Writing an additional line of code and a dollar sign is not that much work after all and we may want more flexible approaches such as displaying the union of the C, S- and D-edges:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">csd_filter</span> <span class="op">&lt;-</span> <span class="va">c_filter</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/union.html">union</a></span><span class="op">(</span><span class="va">s_filter</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+<code class="sourceCode R"><span class="va">csd_filter</span> <span class="op">&lt;-</span> <span class="va">c_filter</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/union.html">union</a></span><span class="op">(</span><span class="va">s_filter</span><span class="op">)</span> <span class="op">%&gt;%</span>
     <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/union.html">union</a></span><span class="op">(</span><span class="va">d_filter</span><span class="op">)</span>
 <span class="va">csd_frame</span> <span class="op">&lt;-</span> <span class="va">csd_results</span><span class="op">[</span><span class="va">csd_filter</span>, <span class="op">]</span></code></pre></div>
 <div id="how-to-we-approach-from-here" class="section level2">
@@ -224,15 +224,20 @@ document.addEventListener("DOMContentLoaded", function() {
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; R version 4.1.2 (2021-11-01)</span>
-<span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
-<span class="co">#&gt; Running under: macOS Catalina 10.15.7</span>
+<span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span>
+<span class="co">#&gt; Running under: Ubuntu 20.04.3 LTS</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Matrix products: default</span>
-<span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib</span>
-<span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib</span>
+<span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3</span>
+<span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; locale:</span>
-<span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span>
+<span class="co">#&gt;  [1] LC_CTYPE=nb_NO.UTF-8       LC_NUMERIC=C              </span>
+<span class="co">#&gt;  [3] LC_TIME=nb_NO.UTF-8        LC_COLLATE=nb_NO.UTF-8    </span>
+<span class="co">#&gt;  [5] LC_MONETARY=nb_NO.UTF-8    LC_MESSAGES=nb_NO.UTF-8   </span>
+<span class="co">#&gt;  [7] LC_PAPER=nb_NO.UTF-8       LC_NAME=C                 </span>
+<span class="co">#&gt;  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span>
+<span class="co">#&gt; [11] LC_MEASUREMENT=nb_NO.UTF-8 LC_IDENTIFICATION=C       </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; attached base packages:</span>
 <span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
@@ -242,50 +247,51 @@ document.addEventListener("DOMContentLoaded", function() {
 <span class="co">#&gt; [5] csdR_1.1.1       BiocStyle_2.20.2</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;   [1] bitops_1.0-7           matrixStats_0.61.0     fs_1.5.0              </span>
-<span class="co">#&gt;   [4] bit64_4.0.5            doParallel_1.0.16      RColorBrewer_1.1-2    </span>
-<span class="co">#&gt;   [7] httr_1.4.2             rprojroot_2.0.2        GenomeInfoDb_1.28.4   </span>
-<span class="co">#&gt;  [10] dynamicTreeCut_1.63-1  backports_1.3.0        tools_4.1.2           </span>
-<span class="co">#&gt;  [13] utf8_1.2.2             R6_2.5.1               rpart_4.1-15          </span>
-<span class="co">#&gt;  [16] Hmisc_4.6-0            DBI_1.1.1              BiocGenerics_0.38.0   </span>
-<span class="co">#&gt;  [19] colorspace_2.0-2       nnet_7.3-16            gridExtra_2.3         </span>
-<span class="co">#&gt;  [22] tidyselect_1.1.1       preprocessCore_1.54.0  bit_4.0.4             </span>
-<span class="co">#&gt;  [25] compiler_4.1.2         WGCNA_1.70-3           textshaping_0.3.6     </span>
-<span class="co">#&gt;  [28] Biobase_2.52.0         htmlTable_2.3.0        desc_1.4.0            </span>
-<span class="co">#&gt;  [31] bookdown_0.24          checkmate_2.0.0        scales_1.1.1          </span>
-<span class="co">#&gt;  [34] pkgdown_1.6.1          systemfonts_1.0.2      stringr_1.4.0         </span>
-<span class="co">#&gt;  [37] digest_0.6.28          foreign_0.8-81         rmarkdown_2.11        </span>
-<span class="co">#&gt;  [40] XVector_0.32.0         RhpcBLASctl_0.21-247.1 jpeg_0.1-9            </span>
-<span class="co">#&gt;  [43] base64enc_0.1-3        pkgconfig_2.0.3        htmltools_0.5.2       </span>
-<span class="co">#&gt;  [46] highr_0.9              fastmap_1.1.0          htmlwidgets_1.5.4     </span>
-<span class="co">#&gt;  [49] rlang_0.4.12           impute_1.66.0          rstudioapi_0.13       </span>
-<span class="co">#&gt;  [52] RSQLite_2.2.8          jquerylib_0.1.4        generics_0.1.1        </span>
-<span class="co">#&gt;  [55] RCurl_1.98-1.5         GO.db_3.13.0           GenomeInfoDbData_1.2.6</span>
-<span class="co">#&gt;  [58] Formula_1.2-4          Matrix_1.3-4           Rcpp_1.0.7            </span>
-<span class="co">#&gt;  [61] munsell_0.5.0          S4Vectors_0.30.2       fansi_0.5.0           </span>
-<span class="co">#&gt;  [64] lifecycle_1.0.1        stringi_1.7.5          yaml_2.2.1            </span>
-<span class="co">#&gt;  [67] zlibbioc_1.38.0        grid_4.1.2             blob_1.2.2            </span>
-<span class="co">#&gt;  [70] parallel_4.1.2         crayon_1.4.2           lattice_0.20-45       </span>
-<span class="co">#&gt;  [73] Biostrings_2.60.2      splines_4.1.2          KEGGREST_1.32.0       </span>
-<span class="co">#&gt;  [76] knitr_1.36             pillar_1.6.4           fastcluster_1.2.3     </span>
-<span class="co">#&gt;  [79] codetools_0.2-18       stats4_4.1.2           evaluate_0.14         </span>
-<span class="co">#&gt;  [82] latticeExtra_0.6-29    data.table_1.14.2      BiocManager_1.30.16   </span>
-<span class="co">#&gt;  [85] png_0.1-7              vctrs_0.3.8            foreach_1.5.1         </span>
-<span class="co">#&gt;  [88] gtable_0.3.0           purrr_0.3.4            cachem_1.0.6          </span>
-<span class="co">#&gt;  [91] ggplot2_3.3.5          xfun_0.28              ragg_1.1.3            </span>
-<span class="co">#&gt;  [94] survival_3.2-13        tibble_3.1.6           iterators_1.0.13      </span>
-<span class="co">#&gt;  [97] AnnotationDbi_1.54.1   memoise_2.0.0          IRanges_2.26.0        </span>
-<span class="co">#&gt; [100] cluster_2.1.2          ellipsis_0.3.2</span></code></pre></div>
+<span class="co">#&gt;   [1] bitops_1.0-7            matrixStats_0.61.0-9000 fs_1.5.0               </span>
+<span class="co">#&gt;   [4] bit64_4.0.5             RColorBrewer_1.1-2      doParallel_1.0.16      </span>
+<span class="co">#&gt;   [7] httr_1.4.2              rprojroot_2.0.2         GenomeInfoDb_1.28.1    </span>
+<span class="co">#&gt;  [10] dynamicTreeCut_1.63-1   backports_1.3.0         tools_4.1.2            </span>
+<span class="co">#&gt;  [13] bslib_0.3.1             utf8_1.2.2              R6_2.5.1               </span>
+<span class="co">#&gt;  [16] rpart_4.1-15            Hmisc_4.5-0             DBI_1.1.1              </span>
+<span class="co">#&gt;  [19] BiocGenerics_0.38.0     colorspace_2.0-2        nnet_7.3-16            </span>
+<span class="co">#&gt;  [22] gridExtra_2.3           tidyselect_1.1.1        preprocessCore_1.54.0  </span>
+<span class="co">#&gt;  [25] bit_4.0.4               compiler_4.1.2          WGCNA_1.70-3           </span>
+<span class="co">#&gt;  [28] textshaping_0.3.5       Biobase_2.52.0          htmlTable_2.2.1        </span>
+<span class="co">#&gt;  [31] desc_1.4.0              bookdown_0.24           sass_0.4.0             </span>
+<span class="co">#&gt;  [34] checkmate_2.0.0         scales_1.1.1            pkgdown_1.6.1          </span>
+<span class="co">#&gt;  [37] systemfonts_1.0.3       stringr_1.4.0           digest_0.6.28          </span>
+<span class="co">#&gt;  [40] foreign_0.8-81          rmarkdown_2.9           XVector_0.32.0         </span>
+<span class="co">#&gt;  [43] RhpcBLASctl_0.20-137    jpeg_0.1-8.1            base64enc_0.1-3        </span>
+<span class="co">#&gt;  [46] pkgconfig_2.0.3         htmltools_0.5.2         highr_0.9              </span>
+<span class="co">#&gt;  [49] fastmap_1.1.0           htmlwidgets_1.5.4       rlang_0.4.12           </span>
+<span class="co">#&gt;  [52] impute_1.66.0           rstudioapi_0.13         RSQLite_2.2.7          </span>
+<span class="co">#&gt;  [55] jquerylib_0.1.4         generics_0.1.1          jsonlite_1.7.2         </span>
+<span class="co">#&gt;  [58] RCurl_1.98-1.3          GO.db_3.10.0            GenomeInfoDbData_1.2.6 </span>
+<span class="co">#&gt;  [61] Formula_1.2-4           Matrix_1.3-4            Rcpp_1.0.7             </span>
+<span class="co">#&gt;  [64] munsell_0.5.0           S4Vectors_0.30.0        fansi_0.5.0            </span>
+<span class="co">#&gt;  [67] lifecycle_1.0.1         stringi_1.7.5           yaml_2.2.1             </span>
+<span class="co">#&gt;  [70] zlibbioc_1.38.0         grid_4.1.2              blob_1.2.2             </span>
+<span class="co">#&gt;  [73] parallel_4.1.2          crayon_1.4.2            lattice_0.20-45        </span>
+<span class="co">#&gt;  [76] Biostrings_2.60.1       splines_4.1.2           KEGGREST_1.32.0        </span>
+<span class="co">#&gt;  [79] knitr_1.36              pillar_1.6.4            fastcluster_1.2.3      </span>
+<span class="co">#&gt;  [82] codetools_0.2-18        stats4_4.1.2            evaluate_0.14          </span>
+<span class="co">#&gt;  [85] latticeExtra_0.6-29     data.table_1.14.2       BiocManager_1.30.16    </span>
+<span class="co">#&gt;  [88] png_0.1-7               vctrs_0.3.8             foreach_1.5.1          </span>
+<span class="co">#&gt;  [91] gtable_0.3.0            purrr_0.3.4             assertthat_0.2.1       </span>
+<span class="co">#&gt;  [94] cachem_1.0.6            ggplot2_3.3.5           xfun_0.24              </span>
+<span class="co">#&gt;  [97] ragg_1.1.3              survival_3.2-13         tibble_3.1.6           </span>
+<span class="co">#&gt; [100] iterators_1.0.13        AnnotationDbi_1.54.1    memoise_2.0.0          </span>
+<span class="co">#&gt; [103] IRanges_2.26.0          cluster_2.1.2           ellipsis_0.3.2</span></code></pre></div>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h1>
-<div id="refs" class="references">
-<div id="ref-MorselliGysi2020">
-<p>Morselli Gysi, Tiago AND Zebardast, Deisy AND de Miranda Fragoso. 2020. “Whole Transcriptomic Network Analysis Using Co-Expression Differential Network Analysis (Codina).” <em>PLOS ONE</em> 15 (10): 1–28. <a href="https://doi.org/10.1371/journal.pone.0240523">https://doi.org/10.1371/journal.pone.0240523</a>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-MorselliGysi2020" class="csl-entry">
+Morselli Gysi, Tiago AND Zebardast, Deisy AND de Miranda Fragoso. 2020. <span>“Whole Transcriptomic Network Analysis Using Co-Expression Differential Network Analysis (CoDiNA).”</span> <em>PLOS ONE</em> 15 (10): 1–28. <a href="https://doi.org/10.1371/journal.pone.0240523">https://doi.org/10.1371/journal.pone.0240523</a>.
 </div>
-<div id="ref-Voigt2017">
-<p>Voigt, Katja AND Almaas, André AND Nowick. 2017. “A Composite Network of Conserved and Tissue Specific Gene Interactions Reveals Possible Genetic Interactions in Glioma.” <em>PLOS Computational Biology</em> 13 (9): 1–34. <a href="https://doi.org/10.1371/journal.pcbi.1005739">https://doi.org/10.1371/journal.pcbi.1005739</a>.</p>
+<div id="ref-Voigt2017" class="csl-entry">
+Voigt, Katja AND Almaas, André AND Nowick. 2017. <span>“A Composite Network of Conserved and Tissue Specific Gene Interactions Reveals Possible Genetic Interactions in Glioma.”</span> <em>PLOS Computational Biology</em> 13 (9): 1–34. <a href="https://doi.org/10.1371/journal.pcbi.1005739">https://doi.org/10.1371/journal.pcbi.1005739</a>.
 </div>
 </div>
 </div>
