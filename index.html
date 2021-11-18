@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">csdR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -79,14 +79,19 @@
 <a href="#csdr" class="anchor"></a>csdR</h1></div>
 <p>This R-package implements the CSD algorithm presented by <a href="http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005739">Voigt et al. 2017</a> in an efficient manner.</p>
 <ul>
-<li>Requrirements: Requirements: R (version 3.5.0 or higher) with packages <code>WGCNA</code>, <code>optparse</code>, <code>glue</code>, <code>magrittr</code> and <code>Rcpp</code> (and of course a C++ compiler) installed. Additionally, having an optimized Blas library such as openBlas is highly recommended for performance reasons (see <a href="https://www.r-bloggers.com/2010/06/faster-r-through-better-blas/">this link</a> for more info).</li>
+<li>Requrirements: Requirements: R (version 4.1.0 or higher) with packages <code>WGCNA</code>, <code>optparse</code>, <code>glue</code>, <code>magrittr</code> and <code>Rcpp</code> (and of course a C++ compiler) installed. Additionally, having an optimized Blas library such as openBlas is highly recommended for performance reasons (see <a href="https://www.r-bloggers.com/2010/06/faster-r-through-better-blas/">this link</a> for more info).</li>
 </ul>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>To install this development version,</p>
-<pre><code># install.packages("devtools")
-devtools::install_github("AlmaasLab/csdR")</code></pre>
+<p>In order to install the release version from Bioconductor, do type in the R terminal:</p>
+<pre><code>if(!requireNamespace("BiocManager")){
+  install.packages("BiocManager")
+}
+BiocManager::install("phyloseq")</code></pre>
+<p>If you want to install the development version instead:</p>
+<pre><code><a href="https://devtools.r-lib.org//reference/remote-reexports.html"># install.packages("devtools")
+devtools::install_github("AlmaasLab/csdR", ref = "main")</a></code></pre>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
