@@ -1,0 +1,18 @@
+citHeader("To cite csdR in publications use:")
+
+bibentry(bibtype = "Article",
+      key = "Pettersen2022",
+      author = c(person(family = "Pettersen", given = c("Jakob" , "P")),
+          person(family = "Almaas", given = c("Eivind"))),
+      title = "csdR, an R package for differential co-expression analysis",
+      journal = "BMC Bioinformatics",
+      year = "2022",
+      month = "Feb",
+      day = "19",
+      volume = "23",
+      number = "1",
+      pages = "79",
+      abstract = "Differential co-expression network analysis has become an important tool to gain understanding of biological phenotypes and diseases. The CSD algorithm is a method to generate differential co-expression networks by comparing gene co-expressions from two different conditions. Each of the gene pairs is assigned conserved (C), specific (S) and differentiated (D) scores based on the co-expression of the gene pair between the two conditions. The result of the procedure is a network where the nodes are genes and the links are the gene pairs with the highest C-, S-, and D-scores. However, the existing CSD-implementations suffer from poor computational performance, difficult user procedures and lack of documentation.",
+      issn = "1471-2105",
+      doi = "10.1186/s12859-022-04605-1",
+      url = "https://doi.org/10.1186/s12859-022-04605-1" )

@@ -22,7 +22,10 @@ devtools::install_github("AlmaasLab/csdR", ref = "main")
 ```
 
 ## Usage
-Please see the [package vignette](https://almaaslab.github.io/csdR/articles/csdR.html).
+Please see the [package vignette](https://almaaslab.github.io/csdR/articles/csdR.html). Additionally check out the article on `csdR`:
+
+Pettersen, J.P., Almaas, E. csdR, an R package for differential co-expression analysis. BMC Bioinformatics 23, 79 (2022). https://doi.org/10.1186/s12859-022-04605-1
+
 
 ## Issues and feedback
 Please use the repository's [issue tracker](https://github.com/AlmaasLab/csdR/issues) if you cannot make the package work or if you have suggestions for improvements.

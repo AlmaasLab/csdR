@@ -1,6 +1,10 @@
+# csdR 1.1.3
+
+Added citation to the `csdR` article which is now printed.
+
 # csdR 1.1.2
 
-Made it expliciat in the documentation that missing values are not allows and
+Made it explicit in the documentation that missing values are not allows and
 wrote a test for this case.
 
 # csdR 1.1.1
