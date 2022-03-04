@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">csdR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/csdR.html">Get started</a>
 </li>
@@ -55,7 +51,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/AlmaasLab/csdR/">
+  <a href="https://github.com/AlmaasLab/csdR/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -76,7 +72,7 @@
       <h1 data-toc-skip>Analyzing differential co-expression with csdR</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/AlmaasLab/csdR/blob/master/vignettes/csdR.Rmd"><code>vignettes/csdR.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/AlmaasLab/csdR/blob/HEAD/vignettes/csdR.Rmd" class="external-link"><code>vignettes/csdR.Rmd</code></a></small>
       <div class="hidden name"><code>csdR.Rmd</code></div>
 
     </div>
@@ -94,9 +90,9 @@ document.addEventListener("DOMContentLoaded", function() {
     if (links[i].hostname != window.location.hostname)
       links[i].target = '_blank';
 });
-</script><div id="when-and-why-to-use-this-package" class="section level1">
-<h1 class="hasAnchor">
-<a href="#when-and-why-to-use-this-package" class="anchor"></a>When and why to use this package</h1>
+</script><div class="section level2">
+<h2 id="when-and-why-to-use-this-package">When and why to use this package<a class="anchor" aria-label="anchor" href="#when-and-why-to-use-this-package"></a>
+</h2>
 <p>The purpose of this package is to compare the gene expression of the genes in <em>two</em> different conditions. The most typical case is when comparing gene expression in patients with a disease with gene expression in study participants without the disease. Hence, we may construct a network containing genes which are relevant for the development of the disease. The input data may come from different measurements of expression such as microarray, proteomics or RNA-seq as long as:</p>
 <ul>
 <li>There are no missing values in the data. Consider filling in with average values or pseudo-values if this is not the case.</li>
@@ -105,31 +101,31 @@ document.addEventListener("DOMContentLoaded", function() {
 </ul>
 <p>For differential gene-expression involving more than two separate conditions, consider <code>CoDiNA</code> <span class="citation">(Morselli Gysi 2020)</span> instead.</p>
 </div>
-<div id="installation" class="section level1">
-<h1 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h1>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>This package is hosted on Bioconductor. To install it, type:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"csdR"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"csdR"</span><span class="op">)</span></code></pre></div>
 <p>Then,</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://almaaslab.github.io/csdR">csdR</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://almaaslab.github.io/csdR">csdR</a></span><span class="op">)</span>
 <span class="co">#&gt; </span></code></pre></div>
 <p>should load the package into the current <strong>R</strong> session. For this vignette, we further load some auxiliary packages and set the random seed</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="op">{</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/glue">glue</a></span><span class="op">)</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org" class="external-link">igraph</a></span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/glue" class="external-link">glue</a></span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">45394534</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">45394534</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="some-theoretical-considerations" class="section level1">
-<h1 class="hasAnchor">
-<a href="#some-theoretical-considerations" class="anchor"></a>Some theoretical considerations</h1>
+<div class="section level2">
+<h2 id="some-theoretical-considerations">Some theoretical considerations<a class="anchor" aria-label="anchor" href="#some-theoretical-considerations"></a>
+</h2>
 <p>This is a re-implementation and slight modification of the CSD algorithm presented by Voigt <em>et al.</em> 2017<span class="citation">(Voigt 2017)</span>. In the first phase, the algorithm finds the co-expression between all genes within each condition using the Spearman correlation. For each pair of genes, we apply bootstrapping across the samples and compute the mean Spearman correlation <span class="math inline">\(\rho_1\)</span> and <span class="math inline">\(\rho_2\)</span> for the two conditions and the associated standard errors <span class="math inline">\(\sigma_1\)</span> and <span class="math inline">\(\sigma_2\)</span>. In the second stage, the values for the two conditions are compared and gives us the following <em>differential</em> co-expression scores:</p>
 <ul>
 <li>Conserved score, <span class="math inline">\(C=\frac{\left|\rho_1+\rho_2\right|}{\sqrt{\sigma_1^2+\sigma_2^2}}\)</span>, a high value indicating the same strong co-expression in both conditions.</li>
@@ -137,13 +133,13 @@ document.addEventListener("DOMContentLoaded", function() {
 <li>Differentiated score, <span class="math inline">\(D=\frac{\left|\left|\rho_1\right|+\left|\rho_2\right|-\left|\rho_1+\rho_2\right|\right|}{\sqrt{\sigma_1^2+\sigma_2^2}}\)</span>, a high value indicating a strong co-expression in both conditions, but with the opposite sign.</li>
 </ul>
 </div>
-<div id="workflow-outline" class="section level1">
-<h1 class="hasAnchor">
-<a href="#workflow-outline" class="anchor"></a>Workflow outline</h1>
+<div class="section level2">
+<h2 id="workflow-outline">Workflow outline<a class="anchor" aria-label="anchor" href="#workflow-outline"></a>
+</h2>
 <p>In this example, we are provided by two expression expression matrices from thyroid glands, <code>sick_expression</code> for patients with thyroid cancer and <code>normal_expression</code> for healthy controls. To run the CSD analysis for these two conditions, we simply do the following:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"sick_expression"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"normal_expression"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"sick_expression"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"normal_expression"</span><span class="op">)</span>
 <span class="va">csd_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_csd.html">run_csd</a></span><span class="op">(</span>
     x_1 <span class="op">=</span> <span class="va">sick_expression</span>, x_2 <span class="op">=</span> <span class="va">normal_expression</span>,
     n_it <span class="op">=</span> <span class="fl">10</span>, nThreads <span class="op">=</span> <span class="fl">2L</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>
@@ -159,73 +155,73 @@ document.addEventListener("DOMContentLoaded", function() {
 <span class="va">d_frame</span> <span class="op">&lt;-</span> <span class="va">csd_results</span><span class="op">[</span><span class="va">d_filter</span>, <span class="op">]</span></code></pre></div>
 <p>Why does the <code>csdR</code> package provide a general <code>partial_argsort</code> function which takes in a numeric vector and spits out the indecies of the largest elements instead of a more specialized function directly extracting the top results from the dataframe? The answer is flexibility. Writing an additional line of code and a dollar sign is not that much work after all and we may want more flexible approaches such as displaying the union of the C, S- and D-edges:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">csd_filter</span> <span class="op">&lt;-</span> <span class="va">c_filter</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/union.html">union</a></span><span class="op">(</span><span class="va">s_filter</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/union.html">union</a></span><span class="op">(</span><span class="va">d_filter</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">csd_filter</span> <span class="op">&lt;-</span> <span class="va">c_filter</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/union.html" class="external-link">union</a></span><span class="op">(</span><span class="va">s_filter</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/union.html" class="external-link">union</a></span><span class="op">(</span><span class="va">d_filter</span><span class="op">)</span>
 <span class="va">csd_frame</span> <span class="op">&lt;-</span> <span class="va">csd_results</span><span class="op">[</span><span class="va">csd_filter</span>, <span class="op">]</span></code></pre></div>
-<div id="how-to-we-approach-from-here" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-to-we-approach-from-here" class="anchor"></a>How to we approach from here?</h2>
+<div class="section level3">
+<h3 id="how-to-we-approach-from-here">How to we approach from here?<a class="anchor" aria-label="anchor" href="#how-to-we-approach-from-here"></a>
+</h3>
 <p>The next logical step is to construct a network and do some analysis. This is outside the scope of this package, but we will provide some pointers for completeness. One viable approach is to use the ordinary <code>write.table</code> function to write the results of a file and then use an external tools such as Cytoscape to further make conclusions. Often, you may want to make an ontology enrichment of the genes.</p>
 <p>The other option is of course to continue using R. Here, we provide an example of combining the C-, S- and D-networks and coloring the edges blue, green and red, respectively depending of where they come from.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">c_network</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_data_frame.html">graph_from_data_frame</a></span><span class="op">(</span><span class="va">c_frame</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="va">s_network</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_data_frame.html">graph_from_data_frame</a></span><span class="op">(</span><span class="va">s_frame</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="va">d_network</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_data_frame.html">graph_from_data_frame</a></span><span class="op">(</span><span class="va">d_frame</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html">E</a></span><span class="op">(</span><span class="va">c_network</span><span class="op">)</span><span class="op">$</span><span class="va">edge_type</span> <span class="op">&lt;-</span> <span class="st">"C"</span>
-<span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html">E</a></span><span class="op">(</span><span class="va">s_network</span><span class="op">)</span><span class="op">$</span><span class="va">edge_type</span> <span class="op">&lt;-</span> <span class="st">"S"</span>
-<span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html">E</a></span><span class="op">(</span><span class="va">d_network</span><span class="op">)</span><span class="op">$</span><span class="va">edge_type</span> <span class="op">&lt;-</span> <span class="st">"D"</span>
-<span class="va">combined_network</span> <span class="op">&lt;-</span> <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/union.html">union</a></span><span class="op">(</span><span class="va">c_network</span>, <span class="va">s_network</span>, <span class="va">d_network</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">c_network</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_data_frame.html" class="external-link">graph_from_data_frame</a></span><span class="op">(</span><span class="va">c_frame</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">s_network</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_data_frame.html" class="external-link">graph_from_data_frame</a></span><span class="op">(</span><span class="va">s_frame</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">d_network</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_data_frame.html" class="external-link">graph_from_data_frame</a></span><span class="op">(</span><span class="va">d_frame</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html" class="external-link">E</a></span><span class="op">(</span><span class="va">c_network</span><span class="op">)</span><span class="op">$</span><span class="va">edge_type</span> <span class="op">&lt;-</span> <span class="st">"C"</span>
+<span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html" class="external-link">E</a></span><span class="op">(</span><span class="va">s_network</span><span class="op">)</span><span class="op">$</span><span class="va">edge_type</span> <span class="op">&lt;-</span> <span class="st">"S"</span>
+<span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html" class="external-link">E</a></span><span class="op">(</span><span class="va">d_network</span><span class="op">)</span><span class="op">$</span><span class="va">edge_type</span> <span class="op">&lt;-</span> <span class="st">"D"</span>
+<span class="va">combined_network</span> <span class="op">&lt;-</span> <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/union.html" class="external-link">union</a></span><span class="op">(</span><span class="va">c_network</span>, <span class="va">s_network</span>, <span class="va">d_network</span><span class="op">)</span>
 <span class="co"># Auxillary function for combining</span>
 <span class="co"># the attributes of the three networks in a proper way</span>
 <span class="va">join_attributes</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">graph</span>, <span class="va">attribute</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span>
-        test <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/edge_attr.html">edge_attr</a></span><span class="op">(</span><span class="va">graph</span>, <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"{attribute}_1"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,
-        yes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span>
-            test <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/edge_attr.html">edge_attr</a></span><span class="op">(</span><span class="va">graph</span>, <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"{attribute}_2"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,
-            yes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/edge_attr.html">edge_attr</a></span><span class="op">(</span><span class="va">graph</span>, <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"{attribute}_3"</span><span class="op">)</span><span class="op">)</span>,
-            no <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/edge_attr.html">edge_attr</a></span><span class="op">(</span><span class="va">graph</span>, <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"{attribute}_2"</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span>
+        test <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/edge_attr.html" class="external-link">edge_attr</a></span><span class="op">(</span><span class="va">graph</span>, <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"{attribute}_1"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,
+        yes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span>
+            test <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/edge_attr.html" class="external-link">edge_attr</a></span><span class="op">(</span><span class="va">graph</span>, <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"{attribute}_2"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,
+            yes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/edge_attr.html" class="external-link">edge_attr</a></span><span class="op">(</span><span class="va">graph</span>, <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"{attribute}_3"</span><span class="op">)</span><span class="op">)</span>,
+            no <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/edge_attr.html" class="external-link">edge_attr</a></span><span class="op">(</span><span class="va">graph</span>, <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"{attribute}_2"</span><span class="op">)</span><span class="op">)</span>
         <span class="op">)</span>,
-        no <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/edge_attr.html">edge_attr</a></span><span class="op">(</span><span class="va">graph</span>, <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"{attribute}_1"</span><span class="op">)</span><span class="op">)</span>
+        no <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/edge_attr.html" class="external-link">edge_attr</a></span><span class="op">(</span><span class="va">graph</span>, <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"{attribute}_1"</span><span class="op">)</span><span class="op">)</span>
     <span class="op">)</span>
 <span class="op">}</span>
-<span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html">E</a></span><span class="op">(</span><span class="va">combined_network</span><span class="op">)</span><span class="op">$</span><span class="va">edge_type</span> <span class="op">&lt;-</span> <span class="fu">join_attributes</span><span class="op">(</span><span class="va">combined_network</span>, <span class="st">"edge_type"</span><span class="op">)</span>
-<span class="va">layout</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/layout_nicely.html">layout_nicely</a></span><span class="op">(</span><span class="va">combined_network</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html">E</a></span><span class="op">(</span><span class="va">combined_network</span><span class="op">)</span><span class="op">$</span><span class="va">color</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html">E</a></span><span class="op">(</span><span class="va">combined_network</span><span class="op">)</span><span class="op">$</span><span class="va">edge_type</span>,
+<span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html" class="external-link">E</a></span><span class="op">(</span><span class="va">combined_network</span><span class="op">)</span><span class="op">$</span><span class="va">edge_type</span> <span class="op">&lt;-</span> <span class="fu">join_attributes</span><span class="op">(</span><span class="va">combined_network</span>, <span class="st">"edge_type"</span><span class="op">)</span>
+<span class="va">layout</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/layout_nicely.html" class="external-link">layout_nicely</a></span><span class="op">(</span><span class="va">combined_network</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html" class="external-link">E</a></span><span class="op">(</span><span class="va">combined_network</span><span class="op">)</span><span class="op">$</span><span class="va">color</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html" class="external-link">recode</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html" class="external-link">E</a></span><span class="op">(</span><span class="va">combined_network</span><span class="op">)</span><span class="op">$</span><span class="va">edge_type</span>,
     C <span class="op">=</span> <span class="st">"darkblue"</span>, S <span class="op">=</span> <span class="st">"green"</span>, D <span class="op">=</span> <span class="st">"darkred"</span>
 <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">combined_network</span>, layout <span class="op">=</span> <span class="va">layout</span>,
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">combined_network</span>, layout <span class="op">=</span> <span class="va">layout</span>,
     vertex.size <span class="op">=</span> <span class="fl">3</span>, edge.width <span class="op">=</span> <span class="fl">2</span>, vertex.label.cex <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span></code></pre></div>
 <p><img src="csdR_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 </div>
 </div>
-<div id="considerations-to-note" class="section level1">
-<h1 class="hasAnchor">
-<a href="#considerations-to-note" class="anchor"></a>Considerations to note</h1>
-<div id="number-of-bootstrap-iterations" class="section level2">
-<h2 class="hasAnchor">
-<a href="#number-of-bootstrap-iterations" class="anchor"></a>Number of bootstrap iterations</h2>
+<div class="section level2">
+<h2 id="considerations-to-note">Considerations to note<a class="anchor" aria-label="anchor" href="#considerations-to-note"></a>
+</h2>
+<div class="section level3">
+<h3 id="number-of-bootstrap-iterations">Number of bootstrap iterations<a class="anchor" aria-label="anchor" href="#number-of-bootstrap-iterations"></a>
+</h3>
 <p>As with any bootstrap procedure the number of iterations represented by the argument <code>n_it</code> needs to be <em>sufficiently large</em> in order to get reproducible results. What this means is a matter of trial and error. In general this means that you should re-run the computations with a different random seed to see whether the number of bootstrap iterations are sufficient. Experience has shown that ~ 100 iterations might be sufficient to reproduce almost the same results in some cases, whereas in other cases, especially when the values are close, you may choose to run several thousand iterations.</p>
 </div>
-<div id="memory-consumption" class="section level2">
-<h2 class="hasAnchor">
-<a href="#memory-consumption" class="anchor"></a>Memory consumption</h2>
+<div class="section level3">
+<h3 id="memory-consumption">Memory consumption<a class="anchor" aria-label="anchor" href="#memory-consumption"></a>
+</h3>
 <p>For datasets with 20 000 to 30 000 genes, a considerable amount of memory is consumed during the computations. It it therefore not recommended in such cases to run CSD on your laptop or even a workstation, but rather on a compute server with several hundreds GB of RAM.</p>
 </div>
-<div id="number-of-top-gene-pairs-to-pick" class="section level2">
-<h2 class="hasAnchor">
-<a href="#number-of-top-gene-pairs-to-pick" class="anchor"></a>Number of top gene pairs to pick</h2>
+<div class="section level3">
+<h3 id="number-of-top-gene-pairs-to-pick">Number of top gene pairs to pick<a class="anchor" aria-label="anchor" href="#number-of-top-gene-pairs-to-pick"></a>
+</h3>
 <p>How many gene pairs to select depends on the specific needs and how big a network you want to handle. A 10 000 edge network may not be easy to visualize, but quantitative network metrics can still be extracted. Also, generating more edges than necessary usually does not make any major harm as superfluous edges can quickly be filter out afterwards. However, if you select fewer edges than you actually need, you have to re-do all calculations to increase the number.</p>
 </div>
 </div>
-<div id="session-info-for-this-vignette" class="section level1">
-<h1 class="hasAnchor">
-<a href="#session-info-for-this-vignette" class="anchor"></a>Session info for this vignette</h1>
+<div class="section level2">
+<h2 id="session-info-for-this-vignette">Session info for this vignette<a class="anchor" aria-label="anchor" href="#session-info-for-this-vignette"></a>
+</h2>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; R version 4.1.2 (2021-11-01)</span>
 <span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
-<span class="co">#&gt; Running under: macOS Catalina 10.15.7</span>
+<span class="co">#&gt; Running under: macOS Big Sur 10.16</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Matrix products: default</span>
 <span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib</span>
@@ -238,54 +234,55 @@ document.addEventListener("DOMContentLoaded", function() {
 <span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; other attached packages:</span>
-<span class="co">#&gt; [1] dplyr_1.0.7      glue_1.5.0       igraph_1.2.8     magrittr_2.0.1  </span>
-<span class="co">#&gt; [5] csdR_1.1.2       BiocStyle_2.20.2</span>
+<span class="co">#&gt; [1] dplyr_1.0.8      glue_1.6.2       igraph_1.2.11    magrittr_2.0.2  </span>
+<span class="co">#&gt; [5] csdR_1.1.3       BiocStyle_2.22.0</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;   [1] bitops_1.0-7           matrixStats_0.61.0     fs_1.5.0              </span>
-<span class="co">#&gt;   [4] bit64_4.0.5            doParallel_1.0.16      RColorBrewer_1.1-2    </span>
-<span class="co">#&gt;   [7] httr_1.4.2             rprojroot_2.0.2        GenomeInfoDb_1.28.4   </span>
-<span class="co">#&gt;  [10] dynamicTreeCut_1.63-1  backports_1.3.0        tools_4.1.2           </span>
-<span class="co">#&gt;  [13] utf8_1.2.2             R6_2.5.1               rpart_4.1-15          </span>
-<span class="co">#&gt;  [16] Hmisc_4.6-0            DBI_1.1.1              BiocGenerics_0.38.0   </span>
-<span class="co">#&gt;  [19] colorspace_2.0-2       nnet_7.3-16            gridExtra_2.3         </span>
-<span class="co">#&gt;  [22] tidyselect_1.1.1       preprocessCore_1.54.0  bit_4.0.4             </span>
-<span class="co">#&gt;  [25] compiler_4.1.2         WGCNA_1.70-3           textshaping_0.3.6     </span>
-<span class="co">#&gt;  [28] Biobase_2.52.0         htmlTable_2.3.0        desc_1.4.0            </span>
-<span class="co">#&gt;  [31] bookdown_0.24          checkmate_2.0.0        scales_1.1.1          </span>
-<span class="co">#&gt;  [34] pkgdown_1.6.1          systemfonts_1.0.2      stringr_1.4.0         </span>
-<span class="co">#&gt;  [37] digest_0.6.28          foreign_0.8-81         rmarkdown_2.11        </span>
-<span class="co">#&gt;  [40] XVector_0.32.0         RhpcBLASctl_0.21-247.1 jpeg_0.1-9            </span>
-<span class="co">#&gt;  [43] base64enc_0.1-3        pkgconfig_2.0.3        htmltools_0.5.2       </span>
-<span class="co">#&gt;  [46] highr_0.9              fastmap_1.1.0          htmlwidgets_1.5.4     </span>
-<span class="co">#&gt;  [49] rlang_0.4.12           impute_1.66.0          rstudioapi_0.13       </span>
-<span class="co">#&gt;  [52] RSQLite_2.2.8          jquerylib_0.1.4        generics_0.1.1        </span>
-<span class="co">#&gt;  [55] RCurl_1.98-1.5         GO.db_3.13.0           GenomeInfoDbData_1.2.6</span>
-<span class="co">#&gt;  [58] Formula_1.2-4          Matrix_1.3-4           Rcpp_1.0.7            </span>
-<span class="co">#&gt;  [61] munsell_0.5.0          S4Vectors_0.30.2       fansi_0.5.0           </span>
-<span class="co">#&gt;  [64] lifecycle_1.0.1        stringi_1.7.5          yaml_2.2.1            </span>
-<span class="co">#&gt;  [67] zlibbioc_1.38.0        grid_4.1.2             blob_1.2.2            </span>
-<span class="co">#&gt;  [70] parallel_4.1.2         crayon_1.4.2           lattice_0.20-45       </span>
-<span class="co">#&gt;  [73] Biostrings_2.60.2      splines_4.1.2          KEGGREST_1.32.0       </span>
-<span class="co">#&gt;  [76] knitr_1.36             pillar_1.6.4           fastcluster_1.2.3     </span>
-<span class="co">#&gt;  [79] codetools_0.2-18       stats4_4.1.2           evaluate_0.14         </span>
-<span class="co">#&gt;  [82] latticeExtra_0.6-29    data.table_1.14.2      BiocManager_1.30.16   </span>
-<span class="co">#&gt;  [85] png_0.1-7              vctrs_0.3.8            foreach_1.5.1         </span>
-<span class="co">#&gt;  [88] gtable_0.3.0           purrr_0.3.4            cachem_1.0.6          </span>
-<span class="co">#&gt;  [91] ggplot2_3.3.5          xfun_0.28              ragg_1.1.3            </span>
-<span class="co">#&gt;  [94] survival_3.2-13        tibble_3.1.6           iterators_1.0.13      </span>
-<span class="co">#&gt;  [97] AnnotationDbi_1.54.1   memoise_2.0.0          IRanges_2.26.0        </span>
-<span class="co">#&gt; [100] cluster_2.1.2          ellipsis_0.3.2</span></code></pre></div>
+<span class="co">#&gt;   [1] bitops_1.0-7           matrixStats_0.61.0     fs_1.5.2              </span>
+<span class="co">#&gt;   [4] bit64_4.0.5            RColorBrewer_1.1-2     doParallel_1.0.17     </span>
+<span class="co">#&gt;   [7] httr_1.4.2             rprojroot_2.0.2        GenomeInfoDb_1.30.1   </span>
+<span class="co">#&gt;  [10] dynamicTreeCut_1.63-1  backports_1.4.1        tools_4.1.2           </span>
+<span class="co">#&gt;  [13] bslib_0.3.1            utf8_1.2.2             R6_2.5.1              </span>
+<span class="co">#&gt;  [16] rpart_4.1-15           Hmisc_4.6-0            DBI_1.1.2             </span>
+<span class="co">#&gt;  [19] BiocGenerics_0.40.0    colorspace_2.0-3       nnet_7.3-16           </span>
+<span class="co">#&gt;  [22] gridExtra_2.3          tidyselect_1.1.2       preprocessCore_1.56.0 </span>
+<span class="co">#&gt;  [25] bit_4.0.4              compiler_4.1.2         WGCNA_1.70-3          </span>
+<span class="co">#&gt;  [28] textshaping_0.3.6      cli_3.2.0              Biobase_2.54.0        </span>
+<span class="co">#&gt;  [31] htmlTable_2.4.0        desc_1.4.0             bookdown_0.24         </span>
+<span class="co">#&gt;  [34] sass_0.4.0             checkmate_2.0.0        scales_1.1.1          </span>
+<span class="co">#&gt;  [37] pkgdown_2.0.2          systemfonts_1.0.4      stringr_1.4.0         </span>
+<span class="co">#&gt;  [40] digest_0.6.29          foreign_0.8-81         rmarkdown_2.12        </span>
+<span class="co">#&gt;  [43] XVector_0.34.0         RhpcBLASctl_0.21-247.1 jpeg_0.1-9            </span>
+<span class="co">#&gt;  [46] base64enc_0.1-3        pkgconfig_2.0.3        htmltools_0.5.2       </span>
+<span class="co">#&gt;  [49] highr_0.9              fastmap_1.1.0          htmlwidgets_1.5.4     </span>
+<span class="co">#&gt;  [52] rlang_1.0.1            impute_1.68.0          rstudioapi_0.13       </span>
+<span class="co">#&gt;  [55] RSQLite_2.2.10         jquerylib_0.1.4        generics_0.1.2        </span>
+<span class="co">#&gt;  [58] jsonlite_1.8.0         RCurl_1.98-1.6         GO.db_3.14.0          </span>
+<span class="co">#&gt;  [61] GenomeInfoDbData_1.2.7 Formula_1.2-4          Matrix_1.3-4          </span>
+<span class="co">#&gt;  [64] Rcpp_1.0.8             munsell_0.5.0          S4Vectors_0.32.3      </span>
+<span class="co">#&gt;  [67] fansi_1.0.2            lifecycle_1.0.1        stringi_1.7.6         </span>
+<span class="co">#&gt;  [70] yaml_2.3.5             zlibbioc_1.40.0        grid_4.1.2            </span>
+<span class="co">#&gt;  [73] blob_1.2.2             parallel_4.1.2         crayon_1.5.0          </span>
+<span class="co">#&gt;  [76] lattice_0.20-45        Biostrings_2.62.0      splines_4.1.2         </span>
+<span class="co">#&gt;  [79] KEGGREST_1.34.0        knitr_1.37             pillar_1.7.0          </span>
+<span class="co">#&gt;  [82] fastcluster_1.2.3      codetools_0.2-18       stats4_4.1.2          </span>
+<span class="co">#&gt;  [85] evaluate_0.15          latticeExtra_0.6-29    data.table_1.14.2     </span>
+<span class="co">#&gt;  [88] BiocManager_1.30.16    png_0.1-7              vctrs_0.3.8           </span>
+<span class="co">#&gt;  [91] foreach_1.5.2          gtable_0.3.0           purrr_0.3.4           </span>
+<span class="co">#&gt;  [94] cachem_1.0.6           ggplot2_3.3.5          xfun_0.30             </span>
+<span class="co">#&gt;  [97] ragg_1.2.2             survival_3.2-13        tibble_3.1.6          </span>
+<span class="co">#&gt; [100] iterators_1.0.14       AnnotationDbi_1.56.2   memoise_2.0.1         </span>
+<span class="co">#&gt; [103] IRanges_2.28.0         cluster_2.1.2          ellipsis_0.3.2</span></code></pre></div>
 </div>
-<div id="references" class="section level1 unnumbered">
-<h1 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h1>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references">
 <div id="ref-MorselliGysi2020">
-<p>Morselli Gysi, Tiago AND Zebardast, Deisy AND de Miranda Fragoso. 2020. “Whole Transcriptomic Network Analysis Using Co-Expression Differential Network Analysis (Codina).” <em>PLOS ONE</em> 15 (10): 1–28. <a href="https://doi.org/10.1371/journal.pone.0240523">https://doi.org/10.1371/journal.pone.0240523</a>.</p>
+<p>Morselli Gysi, Tiago AND Zebardast, Deisy AND de Miranda Fragoso. 2020. “Whole Transcriptomic Network Analysis Using Co-Expression Differential Network Analysis (Codina).” <em>PLOS ONE</em> 15 (10): 1–28. <a href="https://doi.org/10.1371/journal.pone.0240523" class="external-link">https://doi.org/10.1371/journal.pone.0240523</a>.</p>
 </div>
 <div id="ref-Voigt2017">
-<p>Voigt, Katja AND Almaas, André AND Nowick. 2017. “A Composite Network of Conserved and Tissue Specific Gene Interactions Reveals Possible Genetic Interactions in Glioma.” <em>PLOS Computational Biology</em> 13 (9): 1–34. <a href="https://doi.org/10.1371/journal.pcbi.1005739">https://doi.org/10.1371/journal.pcbi.1005739</a>.</p>
+<p>Voigt, Katja AND Almaas, André AND Nowick. 2017. “A Composite Network of Conserved and Tissue Specific Gene Interactions Reveals Possible Genetic Interactions in Glioma.” <em>PLOS Computational Biology</em> 13 (9): 1–34. <a href="https://doi.org/10.1371/journal.pcbi.1005739" class="external-link">https://doi.org/10.1371/journal.pcbi.1005739</a>.</p>
 </div>
 </div>
 </div>
@@ -302,11 +299,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
       <footer><div class="copyright">
-  <p>Developed by Jakob Peder Pettersen.</p>
+  <p></p>
+<p>Developed by Jakob Peder Pettersen.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -314,6 +313,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
   
 
+
+  
 
   </body>
 </html>

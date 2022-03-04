@@ -21,6 +21,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -33,18 +35,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">csdR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="articles/csdR.html">Get started</a>
 </li>
@@ -57,7 +53,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/AlmaasLab/csdR/">
+  <a href="https://github.com/AlmaasLab/csdR/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -74,74 +70,83 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="csdr" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#csdr" class="anchor"></a>csdR</h1></div>
-<p>This R-package implements the CSD algorithm presented by <a href="http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005739">Voigt et al. 2017</a> in an efficient manner.</p>
-<ul>
-<li>Requrirements: Requirements: R (version 4.1.0 or higher) with packages <code>WGCNA</code>, <code>optparse</code>, <code>glue</code>, <code>magrittr</code> and <code>Rcpp</code> (and of course a C++ compiler) installed. Additionally, having an optimized Blas library such as openBlas is highly recommended for performance reasons (see <a href="https://www.r-bloggers.com/2010/06/faster-r-through-better-blas/">this link</a> for more info).</li>
-</ul>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level1">
+<div class="page-header"><h1 id="csdr">csdR<a class="anchor" aria-label="anchor" href="#csdr"></a>
+</h1></div>
+<p>This R-package implements the CSD algorithm presented by <a href="http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005739" class="external-link">Voigt et al. 2017</a> in an efficient manner. * Requrirements: Requirements: R (version 4.1.0 or higher) with packages <code>WGCNA</code>, <code>optparse</code>, <code>glue</code>, <code>magrittr</code> and <code>Rcpp</code> (and of course a C++ compiler) installed. Additionally, having an optimized Blas library such as openBlas is highly recommended for performance reasons (see <a href="https://www.r-bloggers.com/2010/06/faster-r-through-better-blas/" class="external-link">this link</a> for more info).</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>In order to install the release version from Bioconductor, do type in the R terminal:</p>
-<pre><code>if(!requireNamespace("BiocManager")){
-  install.packages("BiocManager")
-}
-BiocManager::install("phyloseq")</code></pre>
+<pre><code><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"phyloseq"</span><span class="op">)</span></code></pre>
 <p>If you want to install the development version instead:</p>
-<pre><code># install.packages("devtools")
-devtools::install_github("AlmaasLab/csdR", ref = "main")</code></pre>
+<pre><code><span class="co"># install.packages("devtools")</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"AlmaasLab/csdR"</span>, ref <span class="op">=</span> <span class="st">"main"</span><span class="op">)</span></code></pre>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
-<p>Please see the <a href="https://almaaslab.github.io/csdR/articles/csdR.html">package vignette</a>.</p>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
+<p>Please see the <a href="https://almaaslab.github.io/csdR/articles/csdR.html">package vignette</a>. Additionally check out the article on <code>csdR</code>:</p>
+<p>Pettersen, J.P., Almaas, E. csdR, an R package for differential co-expression analysis. BMC Bioinformatics 23, 79 (2022). <a href="https://doi.org/10.1186/s12859-022-04605-1" class="external-link uri">https://doi.org/10.1186/s12859-022-04605-1</a></p>
 </div>
-<div id="issues-and-feedback" class="section level2">
-<h2 class="hasAnchor">
-<a href="#issues-and-feedback" class="anchor"></a>Issues and feedback</h2>
-<p>Please use the repository’s <a href="https://github.com/AlmaasLab/csdR/issues">issue tracker</a> if you cannot make the package work or if you have suggestions for improvements.</p>
+<div class="section level2">
+<h2 id="issues-and-feedback">Issues and feedback<a class="anchor" aria-label="anchor" href="#issues-and-feedback"></a>
+</h2>
+<p>Please use the repository’s <a href="https://github.com/AlmaasLab/csdR/issues" class="external-link">issue tracker</a> if you cannot make the package work or if you have suggestions for improvements.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from BIOC at <br><a href="https://www.bioconductor.org/packages/csdR">https://​www.bioconductor.org/​packages/​csdR</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/AlmaasLab/csdR/">https://​github.com/​AlmaasLab/​csdR/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/AlmaasLab/csdR/issues">https://​github.com/​AlmaasLab/​csdR/​issues</a>
-</li>
+<li><a href="https://www.bioconductor.org/packages/csdR" class="external-link">View on Bioconductor</a></li>
+<li><a href="https://github.com/AlmaasLab/csdR/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/AlmaasLab/csdR/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></small></li>
+<li><small><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></small></li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>Jakob Peder Pettersen <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-3485-1634" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html#citation">Citing csdR</a></li>
 </ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Jakob Peder Pettersen <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-3485-1634" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+</ul>
+</div>
+
+
 
   </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Jakob Peder Pettersen.</p>
+  <p></p>
+<p>Developed by Jakob Peder Pettersen.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -149,6 +154,8 @@ devtools::install_github("AlmaasLab/csdR", ref = "main")</code></pre>
 
   
 
+
+  
 
   </body>
 </html>
