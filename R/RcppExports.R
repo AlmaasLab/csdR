@@ -2,7 +2,7 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' @title Extract indecies corresponding to the largest elements
-#' @description Extracts the indecies of the \eqn{n} largest elements of the input
+#' @description Extracts the indecies of the \eqn{n} largest elements of the input.
 #' This procedure is equivalent to \code{order(x, decreasing = TRUE)[1:n_elements]},
 #' but is much faster and avoids the overhead of sorting discarded elements.
 #' This function is useful for extracting the rows in a data frame having the
