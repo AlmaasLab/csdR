@@ -1,3 +1,10 @@
+# csdR 1.5.1
+
+Fixed segfault issue which did occur in `partial_argsort()` when the `n_elements`
+argument was larger than the length of the input vector. In order to ensure equivalence with
+`order(x, decreasing = TRUE)[1:n_elements]`, the additional elements, if any, are padded at the 
+end of the answer as `NA` values.
+
 # csdR 1.1.3
 
 Added citation to the `csdR` article which is now printed.
