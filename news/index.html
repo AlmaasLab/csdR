@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">csdR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.1</span>
       </span>
     </div>
 
@@ -50,6 +50,10 @@
       <small>Source: <a href="https://github.com/AlmaasLab/csdR/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.1" id="csdr-151">csdR 1.5.1<a class="anchor" aria-label="anchor" href="#csdr-151"></a></h2>
+<p>Fixed segfault issue which did occur in <code><a href="../reference/partial_argsort.html">partial_argsort()</a></code> when the <code>n_elements</code> argument was larger than the length of the input vector. In order to ensure equivalence with <code>order(x, decreasing = TRUE)[1:n_elements]</code>, the additional elements, if any, are padded at the end of the answer as <code>NA</code> values.</p>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.1.3" id="csdr-113">csdR 1.1.3<a class="anchor" aria-label="anchor" href="#csdr-113"></a></h2>
 <p>Added citation to the <code>csdR</code> article which is now printed.</p>
