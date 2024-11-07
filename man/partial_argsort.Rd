@@ -16,7 +16,7 @@ Numeric vector, the indecies of the largest elements (in sorted order) in
 \code{x}.
 }
 \description{
-Extracts the indecies of the \eqn{n} largest elements of the input
+Extracts the indecies of the \eqn{n} largest elements of the input.
 This procedure is equivalent to \code{order(x, decreasing = TRUE)[1:n_elements]},
 but is much faster and avoids the overhead of sorting discarded elements.
 This function is useful for extracting the rows in a data frame having the

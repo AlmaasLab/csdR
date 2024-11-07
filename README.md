@@ -11,7 +11,7 @@ In order to install the release version from Bioconductor, do type in the R term
 if(!requireNamespace("BiocManager")){
   install.packages("BiocManager")
 }
-BiocManager::install("phyloseq")
+BiocManager::install("csdR")
 ```
 
 If you want to install the development version instead:

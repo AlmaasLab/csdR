@@ -2,8 +2,8 @@
 % Please edit documentation in R/csdR-package.R
 \docType{package}
 \name{csdR}
-\alias{csdR}
 \alias{csdR-package}
+\alias{csdR}
 \title{Perform differential co-expression analysis}
 \description{
 This package provides functionality

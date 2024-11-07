@@ -217,6 +217,9 @@ whereas in other cases,
 especially when the values are close,
 you may choose to run several thousand iterations.
 
+## Number of threads
+The parallelization of `csdR` occurs within each individual iteration. While parallelizing across the iterations would in theory yield better CPU utilization, this approach is unfeasible due the fact that memory consumption use would almost be proportional to the number of threads. Instead, parallelization is used in computing the co-expression matrix and updating the mean and variance for each iteration. As shown in the `csdR` paper, parallelism can provide 2x-3x speedup, but there are diminishing returns in the performance gained, so running more than 10 threads is most likely a waste a resources. Limited memory bandwidth is the most likely culprit behind the failure to scale, so systems with higher memory bandwidth are more likely to utilize multiple threads better.
+
 ## Memory consumption
 
 For datasets with 20 000 to 30 000 genes,

@@ -86,7 +86,7 @@ validate_csd_input <- function(x_1, x_2) {
 }
 
 #' @title Run CSD analysis
-#' @description This function implements the a CSD based on the
+#' @description This function implements the CSD algorithm based on the
 #' one presented by Voigt et al. 2017. All pairs of genes are
 #' first compared within each condition by the Spearman correlation
 #' and the correlation and its variance are
@@ -112,22 +112,22 @@ validate_csd_input <- function(x_1, x_2) {
 #'  results of the CSD analysis.
 #'  This frame has a row for each pair of genes and has the
 #'  following columns: \describe{
-#'  \item{Gene1}{Character, the name of the first gene}
-#'  \item{Gene2}{Character, the name of the second gene}
-#'  \item{rho1}{Mean correlation of the two genes in the first condition}
-#'  \item{rho2}{Mean correlation of the two genes in the second condition}
-#'  \item{var1}{The estimated variance of \code{rho1}
+#'  \item{\code{Gene1}}{Character, the name of the first gene}
+#'  \item{\code{Gene2}}{Character, the name of the second gene}
+#'  \item{\code{rho1}}{Mean correlation of the two genes in the first condition}
+#'  \item{\code{rho2}}{Mean correlation of the two genes in the second condition}
+#'  \item{\code{var1}}{The estimated variance of \code{rho1}
 #'   determined by bootstrapping}
-#'  \item{var2}{The estimated variance of \code{rho2}
+#'  \item{\code{var2}}{The estimated variance of \code{rho2}
 #'   determined by bootstrapping}
-#'  \item{cVal}{Numeric, the conserved score.
+#'  \item{\code{cVal}}{Numeric, the conserved score.
 #'   A high value indicates that the co-expression of the two genes
 #'   have the same sign in both conditions}
-#'   \item{sVal}{Numeric, the specific score.
+#'   \item{\code{sVal}}{Numeric, the specific score.
 #'   A high value indicates that the co-expression of the two genes
 #'   have a high degree of co-expression in
 #'   one condition, but not the other.}
-#'   \item{dVal}{Numeric, the differentiated score.
+#'   \item{\code{dVal}}{Numeric, the differentiated score.
 #'   A high value indicates that the co-expression of the two genes have
 #'   a high degree of co-expression in
 #'   both condition, but the sign of co-expression is different.}
@@ -136,6 +136,9 @@ validate_csd_input <- function(x_1, x_2) {
 #' do not need to be in the same order,
 #' but must be in the same namespace.
 #' Only genes present in both datasets will be considered for the analysis.
+#' The parallelism gained by `nThreads` applies to the computations
+#' within a single iteration. The iterations are run is serial in order
+#' to reduce the memory footprint.
 #' @references Voigt A, Nowick K and Almaas E
 #' 'A composite network of conserved and tissue specific
 #' gene interactions reveals possible genetic interactions in glioma'
