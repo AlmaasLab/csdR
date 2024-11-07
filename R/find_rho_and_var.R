@@ -104,9 +104,9 @@ validate_csd_input <- function(x_1, x_2) {
 #' @param n_it Integer, number of bootstrap iterations
 #' @param nThreads Integer, number of threads to use for computations
 #' @param verbose Logical, should progress be printed?
-#' @param iterations_gap If output is verbose - number of iterations
-#' after issue a status message
-#' (Default=1 - displayed only if verbose=TRUE)
+#' @param iterations_gap If output is verbose - Number of iterations between
+#' each status message
+#' (Default=1 - Displayed only if \code{verbose=TRUE})
 #' @return A \code{data.frame} with
 #' the additional class attribute \code{csd_res} with the
 #'  results of the CSD analysis.

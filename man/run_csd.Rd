@@ -29,9 +29,9 @@ the second condition.}
 
 \item{verbose}{Logical, should progress be printed?}
 
-\item{iterations_gap}{If output is verbose - number of iterations
-after issue a status message
-(Default=1 - displayed only if verbose=TRUE)}
+\item{iterations_gap}{If output is verbose - Number of iterations between
+each status message
+(Default=1 - Displayed only if \code{verbose=TRUE})}
 }
 \value{
 A \code{data.frame} with
