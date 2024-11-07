@@ -1,10 +1,9 @@
-pandoc: 2.7.3
-pkgdown: 2.0.6
+pandoc: 3.1.11
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   csdR: csdR.html
-last_built: 2022-11-24T13:25Z
+last_built: 2024-11-07T15:28Z
 urls:
   reference: https://almaaslab.github.io/csdR/reference
   article: https://almaaslab.github.io/csdR/articles
-

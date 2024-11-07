@@ -1,42 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://almaaslab.github.io/csdR/404.html</loc>
-  </url>
-  <url>
-    <loc>https://almaaslab.github.io/csdR/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://almaaslab.github.io/csdR/articles/csdR.html</loc>
-  </url>
-  <url>
-    <loc>https://almaaslab.github.io/csdR/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://almaaslab.github.io/csdR/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://almaaslab.github.io/csdR/index.html</loc>
-  </url>
-  <url>
-    <loc>https://almaaslab.github.io/csdR/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://almaaslab.github.io/csdR/reference/csdR.html</loc>
-  </url>
-  <url>
-    <loc>https://almaaslab.github.io/csdR/reference/data-expression.html</loc>
-  </url>
-  <url>
-    <loc>https://almaaslab.github.io/csdR/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://almaaslab.github.io/csdR/reference/partial_argsort.html</loc>
-  </url>
-  <url>
-    <loc>https://almaaslab.github.io/csdR/reference/run_cor_bootstrap.html</loc>
-  </url>
-  <url>
-    <loc>https://almaaslab.github.io/csdR/reference/run_csd.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://almaaslab.github.io/csdR/404.html</loc></url>
+<url><loc>https://almaaslab.github.io/csdR/LICENSE.html</loc></url>
+<url><loc>https://almaaslab.github.io/csdR/articles/csdR.html</loc></url>
+<url><loc>https://almaaslab.github.io/csdR/articles/index.html</loc></url>
+<url><loc>https://almaaslab.github.io/csdR/authors.html</loc></url>
+<url><loc>https://almaaslab.github.io/csdR/index.html</loc></url>
+<url><loc>https://almaaslab.github.io/csdR/news/index.html</loc></url>
+<url><loc>https://almaaslab.github.io/csdR/reference/csdR.html</loc></url>
+<url><loc>https://almaaslab.github.io/csdR/reference/data-expression.html</loc></url>
+<url><loc>https://almaaslab.github.io/csdR/reference/index.html</loc></url>
+<url><loc>https://almaaslab.github.io/csdR/reference/partial_argsort.html</loc></url>
+<url><loc>https://almaaslab.github.io/csdR/reference/run_cor_bootstrap.html</loc></url>
+<url><loc>https://almaaslab.github.io/csdR/reference/run_csd.html</loc></url>
 </urlset>
+
