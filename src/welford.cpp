@@ -1,3 +1,4 @@
+#define RCPP_NO_BOUNDS_CHECK
 #include <Rcpp.h>
 using namespace Rcpp;
 
